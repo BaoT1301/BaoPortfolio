@@ -7,44 +7,44 @@ import Tooltip from "./Tooltip/index";
 import { Image } from "astro:assets";
 ---
 
-<Card colSpan="md:col-span-3" rowSpan="md:row-span-4">
+<Card colSpan="md:col-span-2 lg:col-span-3" rowSpan="md:row-span-4">
   <div class="flex w-full h-full">
-    <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
+    <div class="flex flex-col justify-between gap-4 flex-1 min-w-0">
       <div class="flex flex-col h-full">
         <h6 class="text-sm font-light m-0 text-gray-500">welcome</h6>
-        <p class="m-0 font-light text-xl">
+        <p class="m-0 font-light text-lg md:text-xl">
           Hello World! I'm <b class="font-bold">Bao Tran</b>, a Computer Science student at George Mason University
           building scalable backends, ML pipelines, and full-stack applications
         </p>
       </div>
-      <div class="flex gap-4 flex-wrap">
+      <div class="flex gap-2 md:gap-4 flex-wrap">
         <a aria-label="github profile" href={LINKS.github} target="_blank">
           <Button aria-label="github profile">
-            <Icon class="h-6" name="ri:github-fill" />
+            <Icon class="h-5 md:h-6" name="ri:github-fill" />
             <span class="sr-only">GitHub Profile</span>
           </Button>
         </a>
         <a aria-label="linkedin profile" href={LINKS.linkedin} target="_blank">
           <Button aria-label="linkedin profile">
-            <Icon class="h-6" name="ri:linkedin-box-fill" />
+            <Icon class="h-5 md:h-6" name="ri:linkedin-box-fill" />
             <span class="sr-only">Linkedin Profile</span>
           </Button>
         </a>
         <a aria-label="email" href="mailto:baotran.swe@gmail.com">
           <Button aria-label="email">
-            <Icon class="h-6" name="ri:mail-fill" />
+            <Icon class="h-5 md:h-6" name="ri:mail-fill" />
             <span class="sr-only">Email</span>
           </Button>
         </a>
         <a aria-label="resume" href="/Bao_Tran_Resume.pdf" target="_blank" download>
           <Button aria-label="resume">
-            <Icon class="h-6" name="ri:file-text-fill" />
+            <Icon class="h-5 md:h-6" name="ri:file-text-fill" />
             <span class="sr-only">Download Resume</span>
           </Button>
         </a>
         <Tooltip client:visible>
           <Button aria-label="easter egg btn">
-            <Icon class="h-6" name="ri:emotion-laugh-line" />
+            <Icon class="h-5 md:h-6" name="ri:emotion-laugh-line" />
             <span class="sr-only">Easter egg button</span>
           </Button>
         </Tooltip>
@@ -52,7 +52,7 @@ import { Image } from "astro:assets";
     </div>
     <Image
       alt="memoji of Bao"
-      class="w-auto max-h-[300px] select-none absolute right-[-110px] bottom-[-20px] z-[-1] opacity-50 md:opacity-100 md:relative md:right-auto md:bottom-auto md:z-auto pointer-events-none"
+      class="hidden md:block w-auto max-h-[200px] lg:max-h-[300px] select-none pointer-events-none flex-shrink-0"
       height="300"
       src="/me.png"
       width="300"

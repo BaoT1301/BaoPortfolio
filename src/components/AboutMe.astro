@@ -2,14 +2,14 @@
 import Card from "./Card/index.astro";
 ---
 
-<Card colSpan="md:col-span-1" rowSpan="md:row-span-6" title="About me">
-  <div class="flex flex-col gap-2">
-    <div class="text-base font-light">
+<Card colSpan="md:col-span-1 lg:col-span-1" rowSpan="md:row-span-3 lg:row-span-6" title="About me">
+  <div class="flex flex-col gap-2 overflow-auto">
+    <div class="text-sm md:text-base font-light">
       <p>
         CS @ George Mason (3.8 GPA, May 2027). SWE Intern @ Astrion Bank & CloudyScale.ai. Google Dev Program participant & TA for Algorithms.
       </p>
       <p class="mt-2">Tech stack:</p>
-      <ul class="list-disc list-inside text-sm">
+      <ul class="list-disc list-inside text-xs md:text-sm">
         <li>Java, Python, TypeScript, Go</li>
         <li>Spring Boot, React, Next.js, Node.js</li>
         <li>PostgreSQL, MongoDB, Redis</li>
@@ -17,7 +17,7 @@ import Card from "./Card/index.astro";
         <li>PyTorch, LangChain, Hugging Face</li>
       </ul>
     </div>
-    <p class="text-base font-light">
+    <p class="text-sm md:text-base font-light">
       In my free time, I grind LeetCode to sharpen my problem-solving skills and explore new frameworks to expand my toolkit.
     </p>
   </div>
