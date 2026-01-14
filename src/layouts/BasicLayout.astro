@@ -1,5 +1,6 @@
 ---
 import { LINKS } from "../lib/constants";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title: string;
@@ -98,6 +99,7 @@ const schema =
 
     <link href="https://cdn.fontshare.com" rel="preconnect" />
     <link href={Astro.url.href} rel="canonical" />
+    <Analytics />
     <script
       is:inline
       set:html={JSON.stringify(schema)}

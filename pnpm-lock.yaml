@@ -32,6 +32,9 @@ importers:
       '@rive-app/canvas':
         specifier: ^2.32.2
         version: 2.32.2
+      '@vercel/analytics':
+        specifier: 1.4.0
+        version: 1.4.0(svelte@5.45.6)(vue@3.5.13(typescript@5.9.3))
       astro:
         specifier: ^5.16.4
         version: 5.16.4(@netlify/blobs@10.4.2)(@types/node@22.7.6)(jiti@2.6.1)(rollup@4.37.0)(tsx@4.19.1)(typescript@5.9.3)(yaml@2.8.1)
@@ -1830,6 +1833,32 @@ packages:
     resolution: {integrity: sha512-GegFDmcWe0V2CR/uN1f+iQuDh2R1vA6EAwSvl1nyL+6ue0/zLyF9yhdVnypIVlJnS6RK/xaLPOP6vWJnqRGhZg==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0 || ^7.0.0-0
+
+  '@vercel/analytics@1.4.0':
+    resolution: {integrity: sha512-eUwWW7l8nPJb0nJmjZuYp9o7YZ9XPj67lU9mEogaPXiFxq/SFB5DMnvQVk4aKcL8kFgotiYdDZWxdiNcWo7cgg==}
+    peerDependencies:
+      '@remix-run/react': ^2
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vercel/nft@0.29.4':
     resolution: {integrity: sha512-6lLqMNX3TuycBPABycx7A9F1bHQR7kiQln6abjFbPrf5C/05qHM9M5E4PeTE59c7z8g6vHnx1Ioihb2AQl7BTA==}
@@ -7597,6 +7626,11 @@ snapshots:
       tinyglobby: 0.2.15
       unplugin-utils: 0.3.1
       vite: 6.4.1(@types/node@22.7.6)(jiti@2.6.1)(tsx@4.19.1)(yaml@2.8.1)
+
+  '@vercel/analytics@1.4.0(svelte@5.45.6)(vue@3.5.13(typescript@5.9.3))':
+    optionalDependencies:
+      svelte: 5.45.6
+      vue: 3.5.13(typescript@5.9.3)
 
   '@vercel/nft@0.29.4(rollup@4.37.0)':
     dependencies:
