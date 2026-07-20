@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const SignalScene = dynamic(() => import("./SignalScene"), { ssr: false });
 const resumeUrl = "https://drive.google.com/file/d/1lxAJD1Zw0EKxDiHWaAneEMxKSwPZEYo8/view?usp=sharing";
+const emailUrl = "mailto:baotran.swe@gmail.com";
+const linkedinUrl = "https://www.linkedin.com/in/baot1301/";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,62 +17,68 @@ const projects = [
   {
     number: "01",
     title: "Orchestrator Studio",
-    label: "MULTI-AGENT DEV TOOL",
+    label: "MULTI AGENT DEV TOOL",
     description:
       "Describe a feature once, fan it into parallel coding worktrees, and merge working commits back in dependency order.",
     tech: ["Gemini", "Git Worktrees", "MongoDB"],
     href: "https://forge-landing-51871.web.app/",
     visual: "orchestrator",
+    status: "WAITLIST",
   },
   {
     number: "02",
-    title: "CollabGuard",
-    label: "AI MODERATION SYSTEM",
-    description:
-      "A human-controlled Reddit moderation workspace for shared queues, evidence-backed semantic review, voting, and audit trails.",
-    tech: ["TypeScript", "Devvit", "Supabase"],
-    href: "https://github.com/Nausmind/reddit-hackathon",
-    visual: "guard",
-  },
-  {
-    number: "03",
-    title: "AI-Hire-AI",
+    title: "AI Hire AI",
     label: "AGENT EXPERIMENT",
     description:
-      "Dual-sided agent workflows that batch applications for candidates and create ATS-ready evidence packets for recruiters.",
+      "Dual sided agent workflows that batch applications for candidates and create ATS ready evidence packets for recruiters.",
     tech: ["Amazon Nova", "Bedrock", "Agents"],
     href: "https://ai-hire-ai.vercel.app",
     visual: "hire",
+    status: "LIVE",
+  },
+  {
+    number: "03",
+    title: "CollabGuard",
+    label: "AI MODERATION SYSTEM",
+    description:
+      "A human controlled Reddit moderation workspace for shared queues, evidence backed semantic review, voting, and audit trails.",
+    tech: ["TypeScript", "Devvit", "Supabase"],
+    href: "https://github.com/Nausmind/reddit-hackathon",
+    visual: "guard",
+    status: "PLAYTEST",
   },
   {
     number: "04",
     title: "Crypto Pilot",
-    label: "REAL-TIME TRADING",
+    label: "REAL TIME TRADING",
     description:
-      "A cryptocurrency trading platform with live prices, market and limit orders, portfolio tooling, and AI-powered support.",
+      "A cryptocurrency trading platform with live prices, market and limit orders, portfolio tooling, and AI powered support.",
     tech: ["WebSockets", "Trading Engine", "AI Assistant"],
     href: "https://pocommunity.com/crypto-pilot/",
     visual: "market",
+    status: "LIVE",
   },
   {
     number: "05",
     title: "Crushie",
     label: "GAMIFIED LEARNING",
     description:
-      "An AI dating academy with vibe profiles, vision-powered coaching, and gamified missions that build social intelligence.",
+      "An AI dating academy with vibe profiles, vision powered coaching, and gamified missions that build social intelligence.",
     tech: ["Gemini Vision", "pgvector", "Next.js 16"],
     href: "https://crushie.vercel.app",
     visual: "social",
+    status: "LIVE",
   },
   {
     number: "06",
     title: "PathAI",
     label: "AI JOB SEARCH",
     description:
-      "An AI career engine that reads a resume as a trajectory, then ranks roles by skills, context, and long-term fit.",
+      "An AI career engine that reads a resume as a trajectory, then ranks roles by skills, context, and long term fit.",
     tech: ["LLMs", "Career Matching", "Resume AI"],
     href: "https://path-ai-xi.vercel.app/",
     visual: "path",
+    status: "LIVE",
   },
   {
     number: "07",
@@ -77,9 +86,10 @@ const projects = [
     label: "RESEARCH ASSISTANT",
     description:
       "A research assistant that searches Wikipedia, the open web, and GPT in parallel before returning one sourced answer.",
-    tech: ["FastAPI", "LangChain", "GPT-4o mini"],
+    tech: ["FastAPI", "LangChain", "GPT 4o mini"],
     href: "https://www.fusionai.studio",
     visual: "research",
+    status: "LIVE",
   },
 ];
 
@@ -88,60 +98,60 @@ const experiences = [
     company: "Deep24",
     badge: "YC W24",
     role: "Founder Fellow",
-    date: "JUN 2026 — NOW",
+    date: "JUN 2026 / NOW",
     href: "https://deep24.com/",
     description:
-      "Building an AI startup inside a YC-backed founder fellowship—moving from raw idea to tested product with an AI coach and founder feedback loops.",
+      "Building an AI startup inside a YC backed founder fellowship. Moving from raw idea to tested product with an AI coach and founder feedback loops.",
     signal: "ZERO → ONE",
   },
   {
     company: "Hemut",
     badge: "YC X25",
     role: "Software Engineer Intern",
-    date: "MAR 2026 — NOW",
+    date: "MAR 2026 / NOW",
     href: "https://www.hemut.com/",
     description:
-      "Designed 5+ agent-based systems, API integrations, and data-enrichment pipelines for a logistics startup—automating internal work and supporting GTM operations.",
+      "Designed 5+ agent based systems, API integrations, and data enrichment pipelines for a logistics startup. Automating internal work and supporting GTM operations.",
     signal: "5+ AGENT SYSTEMS",
   },
   {
     company: "Ellucian",
     badge: "AI PLATFORM",
     role: "Software Engineer Intern",
-    date: "MAY 2026 — NOW",
+    date: "MAY 2026 / NOW",
     href: "https://www.ellucian.com/",
     description:
-      "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment—with a focus on reliable production engineering.",
+      "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment, with a focus on reliable production engineering.",
     signal: "AI × CLOUD",
   },
   {
     company: "Todd",
     badge: "AGTECH",
     role: "Software Engineer Extern",
-    date: "JUN 2026 — NOW",
+    date: "JUN 2026 / NOW",
     href: "https://toddagriscience.com/en",
     description:
-      "Building AI-powered agtech software across product engineering, farm-management workflows, and internal tools using Next.js, TypeScript, Supabase, Drizzle, and PostgreSQL.",
+      "Building AI powered agtech software across product engineering, farm management workflows, and internal tools using Next.js, TypeScript, Supabase, Drizzle, and PostgreSQL.",
     signal: "AI × AGRICULTURE",
   },
   {
     company: "Deepiri",
     badge: "AI RESEARCH",
     role: "Founding Engineer",
-    date: "FEB 2026 — NOW",
+    date: "FEB 2026 / NOW",
     href: "https://deepiri.com",
     description:
-      "Built AI features, ML pipelines, and RAG systems for a 35+ developer research collective—supporting 100+ internal users and improving research efficiency by 40%.",
+      "Built AI features, ML pipelines, and RAG systems for a 35+ developer research collective. Supporting 100+ internal users and improving research efficiency by 40%.",
     signal: "100+ USERS",
   },
   {
     company: "Handshake",
     badge: "LLM EVALS",
     role: "Software Engineer Fellow",
-    date: "MAY — JUN 2026",
+    date: "MAY / JUN 2026",
     href: "https://joinhandshake.com/ai/opportunities",
     description:
-      "Developed golden solutions and adversarial test cases for difficult software-engineering tasks, with reliable judging criteria for benchmarking AI coding systems.",
+      "Developed golden solutions and adversarial test cases for difficult software engineering tasks, with reliable judging criteria for benchmarking AI coding systems.",
     signal: "ADVERSARIAL EVALS",
   },
 ];
@@ -153,6 +163,15 @@ const toolRows = [
   ["LLMs", "AGENTS", "RAG", "AUTOMATION", "EVALUATION"],
 ];
 
+const storyChapters = [
+  { key: "question", id: "top", number: "01", label: "THE QUESTION" },
+  { key: "experiments", id: "work", number: "02", label: "EXPERIMENTS" },
+  { key: "practice", id: "experience", number: "03", label: "PRACTICE" },
+  { key: "language", id: "stack", number: "04", label: "THE LANGUAGE" },
+  { key: "future", id: "currently", number: "05", label: "NEXT SIGNAL" },
+  { key: "invitation", id: "contact", number: "06", label: "OPEN LOOP" },
+];
+
 function ProjectVisual({ type }: { type: string }) {
   if (type === "orchestrator") {
     return (
@@ -160,7 +179,7 @@ function ProjectVisual({ type }: { type: string }) {
         <div className="orchestrator-window">
           <div className="orchestrator-titlebar">
             <span className="window-dots"><i /><i /><i /></span>
-            <span>ORCHESTRATOR / AUTH-FLOW</span>
+            <span>ORCHESTRATOR / AUTH FLOW</span>
             <span className="workflow-live"><i /> RUNNING</span>
           </div>
           <div className="orchestrator-body">
@@ -203,7 +222,7 @@ function ProjectVisual({ type }: { type: string }) {
           </div>
           <div className="orchestrator-statusbar">
             <span><i /> 3 AGENTS WORKING IN PARALLEL</span>
-            <span>BRANCH / feature-auth</span>
+            <span>BRANCH / feature auth</span>
           </div>
         </div>
       </div>
@@ -239,13 +258,13 @@ function ProjectVisual({ type }: { type: string }) {
     return (
       <div className="project-visual hire-visual" aria-hidden="true">
         <div className="hire-pipeline">
-          <div className="mini-titlebar"><span>AI-HIRE-AI / LIVE RUN</span><span><i /> 10 APPLICATIONS</span></div>
+          <div className="mini-titlebar"><span>AI HIRE AI / LIVE RUN</span><span><i /> 10 APPLICATIONS</span></div>
           <div className="candidate-card"><span>BT</span><div><small>CANDIDATE</small><b>Profile memory</b><i>READY</i></div></div>
           <span className="pipeline-arrow">→</span>
           <div className="hire-agents">
             <div><span>01</span><b>FIT RANKER</b><i>98% match</i></div>
             <div><span>02</span><b>FIELD MAPPER</b><i>12 fields</i></div>
-            <div><span>03</span><b>FOLLOW-UP</b><i>draft ready</i></div>
+            <div><span>03</span><b>FOLLOW UP</b><i>draft ready</i></div>
           </div>
           <span className="pipeline-arrow">→</span>
           <div className="hire-output"><small>HUMAN REVIEW</small><b>ATS packet<br/>ready</b><span>APPROVE ✓</span></div>
@@ -258,7 +277,7 @@ function ProjectVisual({ type }: { type: string }) {
     return (
       <div className="project-visual market-visual" aria-hidden="true">
         <div className="market-terminal">
-          <div className="mini-titlebar"><span>CRYPTO PILOT / BTC-USD</span><span className="market-up">+4.82%</span></div>
+          <div className="mini-titlebar"><span>CRYPTO PILOT / BTC USD</span><span className="market-up">+4.82%</span></div>
           <div className="market-price"><small>BITCOIN</small><b>$104,284.32</b><span>LIVE MARKET</span></div>
           <div className="candle-chart"><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /></div>
           <div className="market-order"><small>AI PORTFOLIO SIGNAL</small><b>Momentum rising</b><div><span>BUY 62%</span><span>HOLD 31%</span><span>SELL 07%</span></div></div>
@@ -305,7 +324,7 @@ function ProjectVisual({ type }: { type: string }) {
       <div className="research-workspace">
         <div className="mini-titlebar"><span>FUSIONAI / RESEARCH</span><span><i /> SYNTHESIZING</span></div>
         <div className="research-query">How does quantum entanglement work?<span>↵</span></div>
-        <div className="source-row"><span>WIKIPEDIA<i>FOUND</i></span><span>OPEN WEB<i>12 RESULTS</i></span><span>GPT-4o<i>READY</i></span></div>
+            <div className="source-row"><span>WIKIPEDIA<i>FOUND</i></span><span>OPEN WEB<i>12 RESULTS</i></span><span>GPT 4o<i>READY</i></span></div>
         <div className="source-flow"><i /><i /><i /></div>
         <div className="answer-sheet"><small>SYNTHESIZED ANSWER</small><b>Entanglement links particle states across distance.</b><p>Measurements are correlated beyond what classical physics predicts.</p><div><span>[1] Wikipedia</span><span>[2] Nature</span><span>[3] arXiv</span></div></div>
       </div>
@@ -319,6 +338,7 @@ export default function Home() {
   const [introDone, setIntroDone] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [portraitMode, setPortraitMode] = useState<"photo" | "render">("photo");
+  const [activeChapter, setActiveChapter] = useState("question");
   const surfaceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -328,7 +348,24 @@ export default function Home() {
 
   useEffect(() => {
     const initialTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-    setTheme(initialTheme);
+    const frame = window.requestAnimationFrame(() => setTheme(initialTheme));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    const chapterSections = Array.from(document.querySelectorAll<HTMLElement>("[data-story-chapter]"));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveChapter((entry.target as HTMLElement).dataset.storyChapter ?? "question");
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -54% 0px", threshold: 0 },
+    );
+    chapterSections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -471,15 +508,15 @@ export default function Home() {
   return (
     <div className="site-shell" ref={surfaceRef} onMouseMove={moveSignal}>
       <div className={`boot-screen ${introDone ? "boot-screen--done" : ""}`} aria-hidden="true">
-        <div className="boot-mark">BT<span>·</span>1301</div>
+        <div className="boot-mark">BT<span>·</span>BUILD</div>
         <div className="boot-track"><i /></div>
-        <div className="boot-copy">LOADING SYSTEMS / 2026</div>
+        <div className="boot-copy">LOADING STORY / 2026</div>
       </div>
 
       <div className="signal-cursor" aria-hidden="true" />
       <nav className="top-nav" aria-label="Primary navigation">
         <a className="nav-logo" href="#top" aria-label="Bao Tran, back to top">
-          <span>BT</span><small>PORTFOLIO 1301</small>
+          <span>BT</span><small>PORTFOLIO</small>
         </a>
         <div className="nav-links">
           <a href="#work">WORK</a>
@@ -499,23 +536,37 @@ export default function Home() {
             <span aria-hidden="true">{theme === "dark" ? "☀" : "◐"}</span>
             <small>{theme === "dark" ? "LIGHT" : "DARK"}</small>
           </button>
-          <a className="nav-cta" href="mailto:baotran.swe@gmail.com">
+          <a className="nav-cta" href={emailUrl}>
             LET&apos;S TALK <span>↗</span>
           </a>
         </div>
       </nav>
 
+      <aside className="story-nav" aria-label="Story chapters">
+        <span className="story-nav-title">MY BUILD LOG</span>
+        <ol>
+          {storyChapters.map((chapter) => (
+            <li className={activeChapter === chapter.key ? "active" : ""} key={chapter.key}>
+              <a href={`#${chapter.id}`} aria-current={activeChapter === chapter.key ? "step" : undefined}>
+                <i>{chapter.number}</i><span>{chapter.label}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </aside>
+
       <main>
-        <section className="hero" id="top">
+        <section className="hero" id="top" data-story-chapter="question">
           <div className="hero-sticky">
             <div className="hero-grid" aria-hidden="true" />
             <SignalScene />
             <div className="hero-meta hero-meta-left">
               <span className="live-dot" /> AVAILABLE FOR FALL &apos;26
             </div>
-            <div className="hero-meta hero-meta-right">FAIRFAX, VA / 38.8462° N</div>
+            <div className="hero-meta hero-meta-right">WASHINGTON, DC / 38.9072° N</div>
 
             <div className="hero-copy">
+              <span className="story-chapter-mark">CHAPTER 01 / THE QUESTION</span>
               <p className="eyebrow">SOFTWARE ENGINEER · AI BUILDER · CS @ GMU</p>
               <h1>
                 I build AI systems
@@ -523,19 +574,21 @@ export default function Home() {
               </h1>
               <div className="hero-bottom-copy">
                 <p>
-                  Turning ambitious ideas into production APIs, agent workflows,
-                  and full-stack products people can actually use.
+                  Most of my work begins with a friction point I can&apos;t ignore.
+                  I pull at it, build a system around it, and keep going until
+                  someone can actually use the result.
                 </p>
                 <div className="hero-actions">
                   <a className="button button-dark" href="#work">EXPLORE WORK <span>↓</span></a>
                   <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">DOWNLOAD RÉSUMÉ ↗</a>
                   <a className="text-link" href="https://github.com/BaoT1301" target="_blank" rel="noreferrer">GITHUB ↗</a>
+                  <a className="text-link" href={linkedinUrl} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
                 </div>
               </div>
             </div>
 
-            <div className="hero-thread" aria-label="A scroll-driven thread from question to shipped product">
-              <div className="thread-meta"><span>BAO TRAN / 1301</span><span>SCROLL TO BUILD ↓</span></div>
+            <div className="hero-thread" aria-label="A scroll driven thread from question to shipped product">
+              <div className="thread-meta"><span>BAO TRAN / BUILD LOG</span><span>SCROLL TO BUILD ↓</span></div>
               <div className="thread-canvas">
                 <div className="thread-rail" aria-hidden="true">
                   <span className="thread-line"><i className="thread-line-fill" /></span>
@@ -561,21 +614,24 @@ export default function Home() {
                     >3D</button>
                   </div>
                   <div className="portrait-media">
-                    <img
+                    <Image
                       className="portrait-photo"
-                      src="/bao-tran-photo-v3.png"
+                      src="/bao-tran-photo-original.png"
                       alt={portraitMode === "photo" ? "Portrait photograph of Bao Tran" : ""}
                       aria-hidden={portraitMode !== "photo"}
-                      width="1254"
-                      height="1254"
+                      fill
+                      sizes="(max-width: 680px) 72vw, (max-width: 980px) 54vw, 32vw"
+                      priority
+                      unoptimized
                     />
-                    <img
+                    <Image
                       className="portrait-render"
                       src="/bao-tran-3d-v1.png"
                       alt={portraitMode === "render" ? "Stylized 3D portrait of Bao Tran" : ""}
                       aria-hidden={portraitMode !== "render"}
-                      width="1536"
-                      height="1536"
+                      fill
+                      sizes="(max-width: 680px) 72vw, (max-width: 980px) 54vw, 32vw"
+                      unoptimized
                     />
                   </div>
                   <span className="portrait-source">{portraitMode === "photo" ? "ORIGINAL FRAME" : "3D STUDY"}</span>
@@ -584,10 +640,10 @@ export default function Home() {
 
                 <div className="portrait-focus"><small>CURRENTLY EXPLORING</small><strong>AGENTS × DEV TOOLS</strong></div>
               </div>
-              <div className="thread-foot"><span>FAIRFAX / VA</span><span>CS @ GMU · AVAILABLE FALL &apos;26</span></div>
+              <div className="thread-foot"><span>WASHINGTON / DC</span><span>CS @ GMU · AVAILABLE FALL &apos;26</span></div>
             </div>
 
-            <div className="hero-index" aria-hidden="true">1301</div>
+            <div className="hero-index" aria-hidden="true">BUILD</div>
           </div>
         </section>
 
@@ -595,19 +651,24 @@ export default function Home() {
           <div className="ticker-track">
             {[0, 1].map((copy) => (
               <div className="ticker-group" aria-hidden="true" key={copy}>
-                <span>AI SYSTEMS</span><i>✦</i><span>PRODUCTION APIs</span><i>✦</i><span>FULL-STACK PRODUCTS</span><i>✦</i>
+                <span>AI SYSTEMS</span><i>✦</i><span>PRODUCTION APIs</span><i>✦</i><span>FULL STACK PRODUCTS</span><i>✦</i>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="work-section" id="work">
+        <section className="work-section" id="work" data-story-chapter="experiments">
+          <div className="story-bridge" data-reveal>
+            <span>THE THREAD / 00</span>
+            <p>I keep returning to one question: <strong>how do you turn something intelligent into something genuinely useful?</strong></p>
+            <div><i>NOTICE</i><b>→</b><i>QUESTION</i><b>→</b><i>BUILD</i><b>→</b><i>SHIP</i></div>
+          </div>
           <div className="section-kicker" data-reveal>
-            <span>SELECTED SYSTEMS</span><span>07 PROJECTS / 2025—26</span>
+            <span>CHAPTER 02 / THE EXPERIMENTS</span><span>07 PROJECTS / 2025 / 26</span>
           </div>
           <div className="work-heading" data-reveal>
-            <h2>Work with<br/><em>a pulse.</em></h2>
-            <p>Projects that think, respond, and solve a real problem—not just rectangles in a browser.</p>
+            <h2>Ideas become<br/><em>evidence.</em></h2>
+            <p>Each project started as a question, became a rough prototype, and taught me what the next version needed to be.</p>
           </div>
 
           <div className="project-showcase-grid">
@@ -630,7 +691,7 @@ export default function Home() {
                 <div className="showcase-card-copy">
                   <div className="showcase-meta">
                     <span>{project.label}</span>
-                    <span className="showcase-status"><i />{project.number === "01" ? "WAITLIST" : project.number === "02" ? "PLAYTEST" : "LIVE"}</span>
+                    <span className="showcase-status"><i />{project.status}</span>
                   </div>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
@@ -646,13 +707,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="experience-section" id="experience">
+        <section className="experience-section" id="experience" data-story-chapter="practice">
           <div className="experience-aside" data-reveal>
             <div className="section-kicker section-kicker-light">
-              <span>FIELD EXPERIENCE</span><span>06 ROLES / 2026</span>
+              <span>CHAPTER 03 / THE PRACTICE</span><span>06 ROLES / 2026</span>
             </div>
-            <h2>Code in the<br/><em>real world.</em></h2>
-            <p>Real teams, real constraints, real software still running after the demo ends.</p>
+            <h2>The prototypes met<br/><em>the real world.</em></h2>
+            <p>Teams, users, deadlines, and production constraints turned experimentation into engineering judgment.</p>
             <div className="experience-counts">
               <div><strong>6</strong><span>ROLES & FELLOWSHIPS</span></div>
               <div><strong>5+</strong><span>AGENT SYSTEMS</span></div>
@@ -690,10 +751,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="stack-section" id="stack">
+        <section className="stack-section" id="stack" data-story-chapter="language">
           <div className="stack-title" data-reveal>
-            <div className="section-kicker"><span>TOOLKIT / CAPABILITIES</span><span>CONTINUOUSLY UPDATING</span></div>
-            <h2>My stack is a<br/><em>moving target.</em></h2>
+            <div className="section-kicker"><span>CHAPTER 04 / THE LANGUAGE</span><span>CONTINUOUSLY UPDATING</span></div>
+            <h2>The tools change.<br/><em>The instinct stays.</em></h2>
           </div>
           <div className="marquee-stack" aria-label="Technology stack" data-reveal>
             {toolRows.map((row, rowIndex) => (
@@ -709,21 +770,21 @@ export default function Home() {
             ))}
           </div>
           <div className="stack-notes" data-reveal>
-            <article><span>01 / BACKEND</span><h3>Systems before syntax.</h3><p>APIs, data models, and services designed for reliability—not just the happy path.</p></article>
+            <article><span>01 / BACKEND</span><h3>Systems before syntax.</h3><p>APIs, data models, and services designed for reliability, not just the happy path.</p></article>
             <article><span>02 / INTELLIGENCE</span><h3>Agents with guardrails.</h3><p>AI pipelines that are observable, evaluable, and grounded in the job they need to do.</p></article>
-            <article><span>03 / PRODUCT</span><h3>Interfaces with intent.</h3><p>Full-stack experiences where motion clarifies state and every detail earns its place.</p></article>
+            <article><span>03 / PRODUCT</span><h3>Interfaces with intent.</h3><p>Full stack experiences where motion clarifies state and every detail earns its place.</p></article>
           </div>
         </section>
 
-        <section className="currently-section">
+        <section className="currently-section" id="currently" data-story-chapter="future">
           <div className="currently-card" data-reveal>
-            <div className="currently-top"><span>NOW / NEXT</span><span className="live-label"><i /> OPEN</span></div>
+            <div className="currently-top"><span>CHAPTER 05 / THE NEXT SIGNAL</span><span className="live-label"><i /> OPEN</span></div>
             <h2>Currently exploring<br/>what agents do <em>after</em> “hello world.”</h2>
             <div className="interest-grid">
-              <span>AGENT OBSERVABILITY</span><span>HUMAN-IN-THE-LOOP</span><span>DEV TOOLS</span><span>AI-NATIVE UX</span>
+              <span>AGENT OBSERVABILITY</span><span>HUMAN IN THE LOOP</span><span>DEV TOOLS</span><span>AI NATIVE UX</span>
             </div>
             <p>Looking for Fall 2026 and Summer 2027 software engineering opportunities.</p>
-            <a href="mailto:baotran.swe@gmail.com">START A CONVERSATION ↗</a>
+            <a href={emailUrl}>START A CONVERSATION ↗</a>
           </div>
           <div className="currently-ascii" aria-hidden="true" data-reveal>
             <div className="ascii-head"><span>RUNNING: curiosity.exe</span><span>●</span></div>
@@ -744,12 +805,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="contact-section" id="contact">
+        <section className="contact-section" id="contact" data-story-chapter="invitation">
           <div className="contact-orbit" aria-hidden="true"><span>AVAILABLE · BUILDING · CURIOUS ·</span></div>
-          <p className="eyebrow" data-reveal>ONE MORE GOOD IDEA?</p>
+          <p className="eyebrow" data-reveal>EPILOGUE / THE OPEN LOOP</p>
           <h2 data-reveal>Let&apos;s make it<br/><em>real.</em></h2>
           <div className="contact-actions" data-reveal>
-            <a href="mailto:baotran.swe@gmail.com" className="contact-email">BAOTRAN.SWE@GMAIL.COM <span>↗</span></a>
+            <a href={emailUrl} className="contact-email">BAOTRAN.SWE@GMAIL.COM <span>↗</span></a>
             <button onClick={copyEmail} aria-live="polite">{copied ? "COPIED!" : "COPY EMAIL"}</button>
           </div>
         </section>
@@ -759,8 +820,8 @@ export default function Home() {
         <div><strong>BAO TRAN</strong><span>SOFTWARE ENGINEER</span></div>
         <div className="footer-links">
           <a href="https://github.com/BaoT1301" target="_blank" rel="noreferrer">GITHUB ↗</a>
-          <a href="https://www.linkedin.com/in/baot1301/" target="_blank" rel="noreferrer">LINKEDIN ↗</a>
-          <a href="mailto:baotran.swe@gmail.com">EMAIL ↗</a>
+          <a href={linkedinUrl} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+          <a href={emailUrl}>EMAIL ↗</a>
         </div>
         <div className="footer-signoff">DESIGNED WITH INTENT / BUILT WITH CODE<br/>© 2026 BAO TRAN</div>
       </footer>

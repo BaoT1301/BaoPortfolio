@@ -143,7 +143,7 @@ export default function SignalScene() {
     visibilityObserver.observe(mount);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     resize();
-    animate();
+    animate(window.performance.now());
 
     return () => {
       window.cancelAnimationFrame(frame);
