@@ -1,6 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import dynamic from "next/dynamic";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const SignalScene = dynamic(() => import("./SignalScene"), { ssr: false });
+const resumeUrl = "https://drive.google.com/file/d/1lxAJD1Zw0EKxDiHWaAneEMxKSwPZEYo8/view?usp=sharing";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -8,8 +16,8 @@ const projects = [
     title: "Orchestrator Studio",
     label: "MULTI-AGENT DEV TOOL",
     description:
-      "A visual workspace for composing, launching, and understanding multi-agent coding workflows.",
-    tech: ["React", "Agents", "Firebase"],
+      "Describe a feature once, fan it into parallel coding worktrees, and merge working commits back in dependency order.",
+    tech: ["Gemini", "Git Worktrees", "MongoDB"],
     href: "https://forge-landing-51871.web.app/",
     visual: "orchestrator",
   },
@@ -18,8 +26,8 @@ const projects = [
     title: "CollabGuard",
     label: "AI MODERATION SYSTEM",
     description:
-      "An AI-assisted Reddit moderation workspace that turns noisy community signals into clear actions.",
-    tech: ["Python", "NLP", "Reddit API"],
+      "A human-controlled Reddit moderation workspace for shared queues, evidence-backed semantic review, voting, and audit trails.",
+    tech: ["TypeScript", "Devvit", "Supabase"],
     href: "https://github.com/Nausmind/reddit-hackathon",
     visual: "guard",
   },
@@ -28,10 +36,50 @@ const projects = [
     title: "AI-Hire-AI",
     label: "AGENT EXPERIMENT",
     description:
-      "A playful recruiting simulation where one AI interviews another—because agents need jobs too.",
-    tech: ["Next.js", "LLMs", "TypeScript"],
+      "Dual-sided agent workflows that batch applications for candidates and create ATS-ready evidence packets for recruiters.",
+    tech: ["Amazon Nova", "Bedrock", "Agents"],
     href: "https://ai-hire-ai.vercel.app",
     visual: "hire",
+  },
+  {
+    number: "04",
+    title: "Crypto Pilot",
+    label: "REAL-TIME TRADING",
+    description:
+      "A cryptocurrency trading platform with live prices, market and limit orders, portfolio tooling, and AI-powered support.",
+    tech: ["WebSockets", "Trading Engine", "AI Assistant"],
+    href: "https://pocommunity.com/crypto-pilot/",
+    visual: "market",
+  },
+  {
+    number: "05",
+    title: "Crushie",
+    label: "GAMIFIED LEARNING",
+    description:
+      "An AI dating academy with vibe profiles, vision-powered coaching, and gamified missions that build social intelligence.",
+    tech: ["Gemini Vision", "pgvector", "Next.js 16"],
+    href: "https://crushie.vercel.app",
+    visual: "social",
+  },
+  {
+    number: "06",
+    title: "PathAI",
+    label: "AI JOB SEARCH",
+    description:
+      "An AI career engine that reads a resume as a trajectory, then ranks roles by skills, context, and long-term fit.",
+    tech: ["LLMs", "Career Matching", "Resume AI"],
+    href: "https://path-ai-xi.vercel.app/",
+    visual: "path",
+  },
+  {
+    number: "07",
+    title: "FusionAI",
+    label: "RESEARCH ASSISTANT",
+    description:
+      "A research assistant that searches Wikipedia, the open web, and GPT in parallel before returning one sourced answer.",
+    tech: ["FastAPI", "LangChain", "GPT-4o mini"],
+    href: "https://www.fusionai.studio",
+    visual: "research",
   },
 ];
 
@@ -49,7 +97,7 @@ const experiences = [
   {
     company: "Hemut",
     badge: "YC X25",
-    role: "AI Automation Engineer",
+    role: "Software Engineer Intern",
     date: "MAR 2026 — NOW",
     href: "https://www.hemut.com/",
     description:
@@ -59,34 +107,105 @@ const experiences = [
   {
     company: "Ellucian",
     badge: "AI PLATFORM",
-    role: "Software Engineering Intern",
+    role: "Software Engineer Intern",
     date: "MAY 2026 — NOW",
     href: "https://www.ellucian.com/",
     description:
       "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment—with a focus on reliable production engineering.",
     signal: "AI × CLOUD",
   },
+  {
+    company: "Todd",
+    badge: "AGTECH",
+    role: "Software Engineer Extern",
+    date: "JUN 2026 — NOW",
+    href: "https://toddagriscience.com/en",
+    description:
+      "Building AI-powered agtech software across product engineering, farm-management workflows, and internal tools using Next.js, TypeScript, Supabase, Drizzle, and PostgreSQL.",
+    signal: "AI × AGRICULTURE",
+  },
+  {
+    company: "Deepiri",
+    badge: "AI RESEARCH",
+    role: "Founding Engineer",
+    date: "FEB 2026 — NOW",
+    href: "https://deepiri.com",
+    description:
+      "Built AI features, ML pipelines, and RAG systems for a 35+ developer research collective—supporting 100+ internal users and improving research efficiency by 40%.",
+    signal: "100+ USERS",
+  },
+  {
+    company: "Handshake",
+    badge: "LLM EVALS",
+    role: "Software Engineer Fellow",
+    date: "MAY — JUN 2026",
+    href: "https://joinhandshake.com/ai/opportunities",
+    description:
+      "Developed golden solutions and adversarial test cases for difficult software-engineering tasks, with reliable judging criteria for benchmarking AI coding systems.",
+    signal: "ADVERSARIAL EVALS",
+  },
 ];
 
 const toolRows = [
-  ["PYTHON", "JAVA", "TYPESCRIPT", "SQL", "BASH", "PYTHON", "JAVA", "TYPESCRIPT"],
-  ["REACT", "NEXT.JS", "FASTAPI", "NODE.JS", "TAILWIND", "REACT", "NEXT.JS"],
-  ["AWS", "DOCKER", "POSTGRESQL", "FIREBASE", "GIT", "AWS", "DOCKER"],
-  ["LLMs", "AGENTS", "RAG", "AUTOMATION", "EVALUATION", "LLMs", "AGENTS"],
+  ["PYTHON", "JAVA", "TYPESCRIPT", "SQL", "BASH"],
+  ["REACT", "NEXT.JS", "FASTAPI", "NODE.JS", "TAILWIND"],
+  ["AWS", "DOCKER", "POSTGRESQL", "FIREBASE", "GIT"],
+  ["LLMs", "AGENTS", "RAG", "AUTOMATION", "EVALUATION"],
 ];
 
 function ProjectVisual({ type }: { type: string }) {
   if (type === "orchestrator") {
     return (
       <div className="project-visual orchestrator-visual" aria-hidden="true">
-        <div className="agent-node agent-node-main">YOU</div>
-        <div className="agent-node agent-node-a">01</div>
-        <div className="agent-node agent-node-b">02</div>
-        <div className="agent-node agent-node-c">03</div>
-        <span className="node-line line-a" />
-        <span className="node-line line-b" />
-        <span className="node-line line-c" />
-        <div className="agent-status"><i /> 3 agents working</div>
+        <div className="orchestrator-window">
+          <div className="orchestrator-titlebar">
+            <span className="window-dots"><i /><i /><i /></span>
+            <span>ORCHESTRATOR / AUTH-FLOW</span>
+            <span className="workflow-live"><i /> RUNNING</span>
+          </div>
+          <div className="orchestrator-body">
+            <aside className="agent-roster">
+              <span className="roster-label">AGENTS / 03</span>
+              <div className="roster-person active"><b>P</b><span><strong>Planner</strong><small>mapping tasks</small></span></div>
+              <div className="roster-person"><b>B</b><span><strong>Builder</strong><small>writing code</small></span></div>
+              <div className="roster-person"><b>R</b><span><strong>Reviewer</strong><small>checking diff</small></span></div>
+              <div className="human-chip"><span>YOU</span><small>direct the team</small></div>
+            </aside>
+            <div className="workflow-canvas">
+              <div className="workflow-heading">
+                <span>LIVE WORKFLOW</span>
+                <small>7 / 8 TASKS COMPLETE</small>
+              </div>
+              <div className="workflow-rail">
+                <div className="workflow-step workflow-prompt">
+                  <span className="step-index">01</span>
+                  <div><small>YOUR GOAL</small><b>Build secure<br/>auth flow</b></div>
+                </div>
+                <span className="flow-arrow">→</span>
+                <div className="agent-stack">
+                  <div><span>PLAN</span><b>3 tasks</b><i className="done">DONE</i></div>
+                  <div><span>BUILD</span><b>12 files</b><i>ACTIVE</i></div>
+                  <div><span>REVIEW</span><b>2 checks</b><i className="queued">NEXT</i></div>
+                </div>
+                <span className="flow-arrow">→</span>
+                <div className="workflow-step workflow-output">
+                  <span className="step-index">03</span>
+                  <div><small>OUTPUT</small><b>Pull request<br/>ready</b></div>
+                  <span className="output-check">✓</span>
+                </div>
+              </div>
+              <div className="workflow-log">
+                <span><i /> builder</span>
+                <p>Connected OAuth callback and added session tests</p>
+                <time>just now</time>
+              </div>
+            </div>
+          </div>
+          <div className="orchestrator-statusbar">
+            <span><i /> 3 AGENTS WORKING IN PARALLEL</span>
+            <span>BRANCH / feature-auth</span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -94,21 +213,102 @@ function ProjectVisual({ type }: { type: string }) {
   if (type === "guard") {
     return (
       <div className="project-visual guard-visual" aria-hidden="true">
-        <div className="scan-line" />
-        <div className="guard-row"><span>r/developers</span><b>SAFE</b></div>
-        <div className="guard-row"><span>spam_probability</span><strong>0.04</strong></div>
-        <div className="guard-copy">“Context reviewed. Conversation protected.”</div>
-        <div className="guard-meter"><span /></div>
+        <div className="guard-shell">
+          <div className="mini-titlebar"><span>COLLABGUARD / MOD QUEUE</span><span><i /> 03 OPEN</span></div>
+          <div className="guard-board">
+            <div className="guard-queue">
+              <small>SHARED QUEUE</small>
+              <div className="queue-item active"><b>r/developers</b><span>semantic review</span><i>HIGH</i></div>
+              <div className="queue-item"><b>r/startups</b><span>possible spam</span><i>MED</i></div>
+              <div className="queue-item"><b>r/programming</b><span>context check</span><i>LOW</i></div>
+            </div>
+            <div className="guard-case">
+              <div className="case-top"><span>CASE / CG-204</span><b>EVIDENCE FOUND</b></div>
+              <p>“You keep posting this link in every thread…”</p>
+              <div className="risk-signal"><span>SEMANTIC RISK</span><strong>0.84</strong><i><b /></i></div>
+              <div className="evidence-tags"><span>repeated link</span><span>hostile tone</span><span>3 reports</span></div>
+              <div className="moderator-actions"><span>GENTLE NUDGE</span><span>START VOTE</span><b>REVIEW →</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "hire") {
+    return (
+      <div className="project-visual hire-visual" aria-hidden="true">
+        <div className="hire-pipeline">
+          <div className="mini-titlebar"><span>AI-HIRE-AI / LIVE RUN</span><span><i /> 10 APPLICATIONS</span></div>
+          <div className="candidate-card"><span>BT</span><div><small>CANDIDATE</small><b>Profile memory</b><i>READY</i></div></div>
+          <span className="pipeline-arrow">→</span>
+          <div className="hire-agents">
+            <div><span>01</span><b>FIT RANKER</b><i>98% match</i></div>
+            <div><span>02</span><b>FIELD MAPPER</b><i>12 fields</i></div>
+            <div><span>03</span><b>FOLLOW-UP</b><i>draft ready</i></div>
+          </div>
+          <span className="pipeline-arrow">→</span>
+          <div className="hire-output"><small>HUMAN REVIEW</small><b>ATS packet<br/>ready</b><span>APPROVE ✓</span></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "market") {
+    return (
+      <div className="project-visual market-visual" aria-hidden="true">
+        <div className="market-terminal">
+          <div className="mini-titlebar"><span>CRYPTO PILOT / BTC-USD</span><span className="market-up">+4.82%</span></div>
+          <div className="market-price"><small>BITCOIN</small><b>$104,284.32</b><span>LIVE MARKET</span></div>
+          <div className="candle-chart"><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /></div>
+          <div className="market-order"><small>AI PORTFOLIO SIGNAL</small><b>Momentum rising</b><div><span>BUY 62%</span><span>HOLD 31%</span><span>SELL 07%</span></div></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "social") {
+    return (
+      <div className="project-visual social-visual" aria-hidden="true">
+        <div className="social-orbit orbit-heart-one">♥</div><div className="social-orbit orbit-heart-two">♥</div>
+        <div className="vibe-card">
+          <div className="mini-titlebar"><span>CRUSHIE / VIBE PROFILE</span><span>AI COACH</span></div>
+          <div className="vibe-person"><span>BT</span><div><small>SOCIAL INTELLIGENCE</small><b>SIQ / 87</b></div></div>
+          <div className="vibe-radar"><i /><i /><i /><b>87</b></div>
+          <div className="vibe-traits"><span>EMPATHY 92</span><span>HUMOR 84</span><span>CONFIDENCE 76</span></div>
+          <div className="coach-tip"><small>LIVE COACH SUGGESTS</small><b>Ask about the concert in their photo.</b><span>TRY IT →</span></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "path") {
+    return (
+      <div className="project-visual path-visual" aria-hidden="true">
+        <div className="path-workspace">
+          <div className="mini-titlebar"><span>PATHAI / CAREER DNA</span><span><i /> SCANNING</span></div>
+          <div className="resume-sheet"><span>BT</span><b>SOFTWARE<br/>ENGINEER</b><i /><i /><i /></div>
+          <div className="path-beam"><span>AI MATCH</span></div>
+          <div className="match-stack">
+            <small>SELECTED MATCHES</small>
+            <div><b>Principal Engineer</b><span>STRIPE</span><strong>98%</strong></div>
+            <div><b>AI Research Lead</b><span>OPENAI</span><strong>94%</strong></div>
+            <div><b>ML Architect</b><span>ANTHROPIC</span><strong>91%</strong></div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="project-visual hire-visual" aria-hidden="true">
-      <div className="hire-face hire-face-one"><span>AI</span><i>HIRING</i></div>
-      <div className="hire-chat">Why should an agent hire you?</div>
-      <div className="hire-face hire-face-two"><span>AI</span><i>CANDIDATE</i></div>
-      <div className="hire-score">MATCH <b>94%</b></div>
+    <div className="project-visual research-visual" aria-hidden="true">
+      <div className="research-workspace">
+        <div className="mini-titlebar"><span>FUSIONAI / RESEARCH</span><span><i /> SYNTHESIZING</span></div>
+        <div className="research-query">How does quantum entanglement work?<span>↵</span></div>
+        <div className="source-row"><span>WIKIPEDIA<i>FOUND</i></span><span>OPEN WEB<i>12 RESULTS</i></span><span>GPT-4o<i>READY</i></span></div>
+        <div className="source-flow"><i /><i /><i /></div>
+        <div className="answer-sheet"><small>SYNTHESIZED ANSWER</small><b>Entanglement links particle states across distance.</b><p>Measurements are correlated beyond what classical physics predicts.</p><div><span>[1] Wikipedia</span><span>[2] Nature</span><span>[3] arXiv</span></div></div>
+      </div>
     </div>
   );
 }
@@ -121,23 +321,100 @@ export default function Home() {
 
   useEffect(() => {
     const introTimer = window.setTimeout(() => setIntroDone(true), 700);
-    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.14 },
-    );
+    return () => window.clearTimeout(introTimer);
+  }, []);
 
-    revealItems.forEach((item) => observer.observe(item));
+  useEffect(() => {
+    const media = gsap.matchMedia();
+    const context = gsap.context(() => {
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        const intro = gsap.timeline({ delay: 0.82 });
+        intro
+          .from(".hero-copy .eyebrow", { autoAlpha: 0, y: 18, duration: 0.55, ease: "power2.out" })
+          .from(".hero h1", { autoAlpha: 0, y: 72, rotate: 1.5, duration: 1, ease: "power4.out" }, "-=0.28")
+          .from(".hero-bottom-copy", { autoAlpha: 0, y: 30, duration: 0.7, ease: "power3.out" }, "-=0.48")
+          .from(".hero-instrument", { autoAlpha: 0, x: 54, rotate: 2.4, duration: 0.9, ease: "power4.out" }, "-=0.65");
+
+        gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((item) => {
+          gsap.fromTo(
+            item,
+            { autoAlpha: 0, y: 46 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: item,
+                start: "top 88%",
+                once: true,
+              },
+            },
+          );
+        });
+
+        gsap.to(".hero-instrument", {
+          yPercent: 13,
+          rotate: 1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.8,
+          },
+        });
+
+        gsap.to(".hero-index", {
+          xPercent: -13,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+
+        gsap.utils.toArray<HTMLElement>(".project-visual").forEach((visual) => {
+          gsap.fromTo(
+            visual,
+            { backgroundPosition: "50% 0%" },
+            {
+              backgroundPosition: "50% 100%",
+              ease: "none",
+              scrollTrigger: {
+                trigger: visual,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.7,
+              },
+            },
+          );
+        });
+
+        gsap.to(".contact-orbit", {
+          rotate: 140,
+          scale: 1.08,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".contact-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      });
+
+      media.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set("[data-reveal]", { autoAlpha: 1, y: 0 });
+      });
+
+    }, surfaceRef);
+
     return () => {
-      window.clearTimeout(introTimer);
-      observer.disconnect();
+      media.revert();
+      context.revert();
     };
   }, []);
 
@@ -170,6 +447,7 @@ export default function Home() {
           <a href="#work">WORK</a>
           <a href="#experience">EXPERIENCE</a>
           <a href="#stack">STACK</a>
+          <a href={resumeUrl} target="_blank" rel="noreferrer">RÉSUMÉ ↗</a>
         </div>
         <a className="nav-cta" href="mailto:baotran.swe@gmail.com">
           LET&apos;S TALK <span>↗</span>
@@ -179,6 +457,7 @@ export default function Home() {
       <main>
         <section className="hero" id="top">
           <div className="hero-grid" aria-hidden="true" />
+          <SignalScene />
           <div className="hero-meta hero-meta-left">
             <span className="live-dot" /> AVAILABLE FOR FALL &apos;26
           </div>
@@ -197,6 +476,7 @@ export default function Home() {
               </p>
               <div className="hero-actions">
                 <a className="button button-dark" href="#work">EXPLORE WORK <span>↓</span></a>
+                <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">DOWNLOAD RÉSUMÉ ↗</a>
                 <a className="text-link" href="https://github.com/BaoT1301" target="_blank" rel="noreferrer">GITHUB ↗</a>
               </div>
             </div>
@@ -227,24 +507,27 @@ export default function Home() {
 
         <section className="statement-strip" aria-label="Portfolio summary">
           <div className="ticker-track">
-            <span>AI SYSTEMS</span><i>✦</i><span>PRODUCTION APIs</span><i>✦</i><span>FULL-STACK PRODUCTS</span><i>✦</i>
-            <span>AI SYSTEMS</span><i>✦</i><span>PRODUCTION APIs</span><i>✦</i><span>FULL-STACK PRODUCTS</span><i>✦</i>
+            {[0, 1].map((copy) => (
+              <div className="ticker-group" aria-hidden="true" key={copy}>
+                <span>AI SYSTEMS</span><i>✦</i><span>PRODUCTION APIs</span><i>✦</i><span>FULL-STACK PRODUCTS</span><i>✦</i>
+              </div>
+            ))}
           </div>
         </section>
 
         <section className="work-section" id="work">
           <div className="section-kicker" data-reveal>
-            <span>SELECTED SYSTEMS</span><span>03 PROJECTS / 2025—26</span>
+            <span>SELECTED SYSTEMS</span><span>07 PROJECTS / 2025—26</span>
           </div>
           <div className="work-heading" data-reveal>
             <h2>Work with<br/><em>a pulse.</em></h2>
             <p>Projects that think, respond, and solve a real problem—not just rectangles in a browser.</p>
           </div>
 
-          <div className="project-grid">
-            {projects.map((project) => (
+          <div className="project-showcase-grid">
+            {projects.map((project, index) => (
               <a
-                className="project-card"
+                className={`project-card showcase-card showcase-${project.visual} ${index === 0 ? "showcase-card-featured" : ""}`}
                 href={project.href}
                 target="_blank"
                 rel="noreferrer"
@@ -254,15 +537,22 @@ export default function Home() {
               >
                 <div className="project-card-head">
                   <span>{project.number}</span>
-                  <span>{project.label}</span>
+                  <span>PROJECT / {project.label}</span>
                   <span>↗</span>
                 </div>
                 <ProjectVisual type={project.visual} />
-                <div className="project-card-copy">
+                <div className="showcase-card-copy">
+                  <div className="showcase-meta">
+                    <span>{project.label}</span>
+                    <span className="showcase-status"><i />{project.number === "01" ? "WAITLIST" : project.number === "02" ? "PLAYTEST" : "LIVE"}</span>
+                  </div>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
-                  <div className="project-tech">
-                    {project.tech.map((tech) => <span key={tech}>{tech}</span>)}
+                  <div className="showcase-footer">
+                    <div className="project-tech">
+                      {project.tech.map((tech) => <span key={tech}>{tech}</span>)}
+                    </div>
+                    <span className="showcase-open">OPEN PROJECT <b>→</b></span>
                   </div>
                 </div>
               </a>
@@ -273,12 +563,12 @@ export default function Home() {
         <section className="experience-section" id="experience">
           <div className="experience-aside" data-reveal>
             <div className="section-kicker section-kicker-light">
-              <span>FIELD EXPERIENCE</span><span>03 ACTIVE SIGNALS</span>
+              <span>FIELD EXPERIENCE</span><span>06 ROLES / 2026</span>
             </div>
             <h2>Code in the<br/><em>real world.</em></h2>
             <p>Real teams, real constraints, real software still running after the demo ends.</p>
             <div className="experience-counts">
-              <div><strong>5+</strong><span>INTERNSHIPS</span></div>
+              <div><strong>6</strong><span>ROLES & FELLOWSHIPS</span></div>
               <div><strong>5+</strong><span>AGENT SYSTEMS</span></div>
               <div><strong>10+</strong><span>CORE TOOLS</span></div>
             </div>
@@ -322,8 +612,12 @@ export default function Home() {
           <div className="marquee-stack" aria-label="Technology stack" data-reveal>
             {toolRows.map((row, rowIndex) => (
               <div className={`tool-row ${rowIndex % 2 ? "tool-row-reverse" : ""}`} key={rowIndex}>
-                <div>
-                  {row.map((tool, index) => <span key={`${tool}-${index}`}>{tool}<i>·</i></span>)}
+                <div className="tool-row-track" aria-hidden="true">
+                  {[0, 1].map((copy) => (
+                    <div className="tool-row-group" key={copy}>
+                      {row.map((tool) => <span key={`${copy}-${tool}`}>{tool}<i>·</i></span>)}
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -351,14 +645,15 @@ export default function Home() {
       │  QUESTION  │
       ╰─────┬──────╯
             │
-     ╭──────▼──────╮
-     │  PROTOTYPE  │◄────╮
-     ╰──────┬──────╯     │
-            │            │
-     ╭──────▼──────╮     │
-     │    LEARN    ├─────╯
-     ╰──────┬──────╯
+      ╭─────▼──────╮
+  ╭──▶│ PROTOTYPE  │
+  │   ╰─────┬──────╯
+  │         │
+  │   ╭─────▼──────╮
+  ╰───┤    LEARN   │
+      ╰─────┬──────╯
             │
+            ▼
          [ SHIP ]`}</pre>
           </div>
         </section>
