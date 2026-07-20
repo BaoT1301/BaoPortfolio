@@ -317,11 +317,18 @@ export default function Home() {
   const [activeExperience, setActiveExperience] = useState(0);
   const [copied, setCopied] = useState(false);
   const [introDone, setIntroDone] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [portraitMode, setPortraitMode] = useState<"photo" | "render">("photo");
   const surfaceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const introTimer = window.setTimeout(() => setIntroDone(true), 700);
     return () => window.clearTimeout(introTimer);
+  }, []);
+
+  useEffect(() => {
+    const initialTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    setTheme(initialTheme);
   }, []);
 
   useEffect(() => {
@@ -333,7 +340,7 @@ export default function Home() {
           .from(".hero-copy .eyebrow", { autoAlpha: 0, y: 18, duration: 0.55, ease: "power2.out" })
           .from(".hero h1", { autoAlpha: 0, y: 72, rotate: 1.5, duration: 1, ease: "power4.out" }, "-=0.28")
           .from(".hero-bottom-copy", { autoAlpha: 0, y: 30, duration: 0.7, ease: "power3.out" }, "-=0.48")
-          .from(".hero-instrument", { autoAlpha: 0, x: 54, rotate: 2.4, duration: 0.9, ease: "power4.out" }, "-=0.65");
+          .from(".hero-thread", { autoAlpha: 0, x: 54, rotate: 1.4, duration: 0.9, ease: "power4.out" }, "-=0.65");
 
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((item) => {
           gsap.fromTo(
@@ -351,18 +358,6 @@ export default function Home() {
               },
             },
           );
-        });
-
-        gsap.to(".hero-instrument", {
-          yPercent: 13,
-          rotate: 1.2,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.8,
-          },
         });
 
         gsap.to(".hero-index", {
@@ -406,6 +401,40 @@ export default function Home() {
         });
       });
 
+      media.add("(min-width: 981px) and (prefers-reduced-motion: no-preference)", () => {
+        const buildThread = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.75,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        buildThread
+          .to(".thread-signal", {
+            y: () => {
+              const canvas = document.querySelector<HTMLElement>(".thread-rail");
+              const signal = document.querySelector<HTMLElement>(".thread-signal");
+              return canvas && signal ? Math.max(230, canvas.clientHeight - signal.offsetHeight - 34) : 280;
+            },
+            rotate: 5,
+            ease: "none",
+          }, 0)
+          .to(".thread-line-fill", { scaleY: 1, ease: "none" }, 0)
+          .to(".portrait-frame", { y: 10, rotate: 0.8, scale: 0.985, ease: "none" }, 0)
+          .to(".hero-copy", { yPercent: -6, autoAlpha: 0.58, ease: "none" }, 0)
+          .to(".thread-step-one", { color: "var(--blue)", x: 5, duration: 0.12 }, 0.08)
+          .to(".thread-step-one i", { backgroundColor: "var(--blue)", color: "var(--on-dark)", duration: 0.12 }, 0.08)
+          .to(".thread-step-two", { color: "var(--ink)", x: 5, duration: 0.12 }, 0.42)
+          .to(".thread-step-two i", { backgroundColor: "var(--ink)", color: "var(--paper)", duration: 0.12 }, 0.42)
+          .to(".thread-step-three", { color: "var(--coral)", x: 5, duration: 0.12 }, 0.74)
+          .to(".thread-step-three i", { backgroundColor: "var(--coral)", color: "var(--on-dark)", duration: 0.12 }, 0.74)
+          .to(".portrait-caption", { backgroundColor: "var(--blue-surface)", duration: 0.12 }, 0.8)
+          .to(".portrait-focus", { autoAlpha: 1, x: 0, duration: 0.12 }, 0.84);
+      });
+
       media.add("(prefers-reduced-motion: reduce)", () => {
         gsap.set("[data-reveal]", { autoAlpha: 1, y: 0 });
       });
@@ -430,6 +459,15 @@ export default function Home() {
     window.setTimeout(() => setCopied(false), 1800);
   };
 
+  const toggleTheme = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = nextTheme;
+    document.documentElement.style.colorScheme = nextTheme;
+    window.localStorage.setItem("portfolio-theme", nextTheme);
+    setTheme(nextTheme);
+    window.requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
+
   return (
     <div className="site-shell" ref={surfaceRef} onMouseMove={moveSignal}>
       <div className={`boot-screen ${introDone ? "boot-screen--done" : ""}`} aria-hidden="true">
@@ -449,60 +487,108 @@ export default function Home() {
           <a href="#stack">STACK</a>
           <a href={resumeUrl} target="_blank" rel="noreferrer">RÉSUMÉ ↗</a>
         </div>
-        <a className="nav-cta" href="mailto:baotran.swe@gmail.com">
-          LET&apos;S TALK <span>↗</span>
-        </a>
+        <div className="nav-actions">
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={toggleTheme}
+            aria-pressed={theme === "dark"}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            <span aria-hidden="true">{theme === "dark" ? "☀" : "◐"}</span>
+            <small>{theme === "dark" ? "LIGHT" : "DARK"}</small>
+          </button>
+          <a className="nav-cta" href="mailto:baotran.swe@gmail.com">
+            LET&apos;S TALK <span>↗</span>
+          </a>
+        </div>
       </nav>
 
       <main>
         <section className="hero" id="top">
-          <div className="hero-grid" aria-hidden="true" />
-          <SignalScene />
-          <div className="hero-meta hero-meta-left">
-            <span className="live-dot" /> AVAILABLE FOR FALL &apos;26
-          </div>
-          <div className="hero-meta hero-meta-right">FAIRFAX, VA / 38.8462° N</div>
+          <div className="hero-sticky">
+            <div className="hero-grid" aria-hidden="true" />
+            <SignalScene />
+            <div className="hero-meta hero-meta-left">
+              <span className="live-dot" /> AVAILABLE FOR FALL &apos;26
+            </div>
+            <div className="hero-meta hero-meta-right">FAIRFAX, VA / 38.8462° N</div>
 
-          <div className="hero-copy">
-            <p className="eyebrow">SOFTWARE ENGINEER · AI BUILDER · CS @ GMU</p>
-            <h1>
-              I build AI systems
-              <span>that actually <em>ship.</em></span>
-            </h1>
-            <div className="hero-bottom-copy">
-              <p>
-                Turning ambitious ideas into production APIs, agent workflows,
-                and full-stack products people can actually use.
-              </p>
-              <div className="hero-actions">
-                <a className="button button-dark" href="#work">EXPLORE WORK <span>↓</span></a>
-                <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">DOWNLOAD RÉSUMÉ ↗</a>
-                <a className="text-link" href="https://github.com/BaoT1301" target="_blank" rel="noreferrer">GITHUB ↗</a>
+            <div className="hero-copy">
+              <p className="eyebrow">SOFTWARE ENGINEER · AI BUILDER · CS @ GMU</p>
+              <h1>
+                I build AI systems
+                <span>that actually <em>ship.</em></span>
+              </h1>
+              <div className="hero-bottom-copy">
+                <p>
+                  Turning ambitious ideas into production APIs, agent workflows,
+                  and full-stack products people can actually use.
+                </p>
+                <div className="hero-actions">
+                  <a className="button button-dark" href="#work">EXPLORE WORK <span>↓</span></a>
+                  <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">DOWNLOAD RÉSUMÉ ↗</a>
+                  <a className="text-link" href="https://github.com/BaoT1301" target="_blank" rel="noreferrer">GITHUB ↗</a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="hero-instrument" aria-label="A live diagram representing Bao's engineering process">
-            <div className="instrument-head">
-              <span>SYSTEM / 1301</span>
-              <span className="instrument-live">● LIVE</span>
-            </div>
-            <div className="orbit-stage" aria-hidden="true">
-              <div className="orbit orbit-one"><i /></div>
-              <div className="orbit orbit-two"><i /></div>
-              <div className="core-mark">BT</div>
-              <span className="orbit-label orbit-label-a">IDEA</span>
-              <span className="orbit-label orbit-label-b">BUILD</span>
-              <span className="orbit-label orbit-label-c">SHIP</span>
-            </div>
-            <div className="instrument-log">
-              <span><i>01</i> PROBLEM FOUND</span>
-              <span><i>02</i> SYSTEM DESIGNED</span>
-              <span><i>03</i> <b>PRODUCTION READY</b></span>
-            </div>
-          </div>
+            <div className="hero-thread" aria-label="A scroll-driven thread from question to shipped product">
+              <div className="thread-meta"><span>BAO TRAN / 1301</span><span>SCROLL TO BUILD ↓</span></div>
+              <div className="thread-canvas">
+                <div className="thread-rail" aria-hidden="true">
+                  <span className="thread-line"><i className="thread-line-fill" /></span>
+                  <div className="thread-step thread-step-one"><i>01</i><span><small>ASK</small><b>QUESTION</b></span></div>
+                  <div className="thread-step thread-step-two"><i>02</i><span><small>MAKE</small><b>BUILD</b></span></div>
+                  <div className="thread-step thread-step-three"><i>03</i><span><small>RELEASE</small><b>SHIP</b></span></div>
+                  <div className="thread-signal"><b>BT</b><i /></div>
+                </div>
 
-          <div className="hero-index" aria-hidden="true">1301</div>
+                <figure className={`portrait-frame portrait-frame-${portraitMode}`}>
+                  <div className="portrait-switch" role="group" aria-label="Choose portrait style">
+                    <button
+                      type="button"
+                      className={portraitMode === "photo" ? "active" : ""}
+                      onClick={() => setPortraitMode("photo")}
+                      aria-pressed={portraitMode === "photo"}
+                    >PHOTO</button>
+                    <button
+                      type="button"
+                      className={portraitMode === "render" ? "active" : ""}
+                      onClick={() => setPortraitMode("render")}
+                      aria-pressed={portraitMode === "render"}
+                    >3D</button>
+                  </div>
+                  <div className="portrait-media">
+                    <img
+                      className="portrait-photo"
+                      src="/bao-tran-photo-v3.png"
+                      alt={portraitMode === "photo" ? "Portrait photograph of Bao Tran" : ""}
+                      aria-hidden={portraitMode !== "photo"}
+                      width="1254"
+                      height="1254"
+                    />
+                    <img
+                      className="portrait-render"
+                      src="/bao-tran-3d-v1.png"
+                      alt={portraitMode === "render" ? "Stylized 3D portrait of Bao Tran" : ""}
+                      aria-hidden={portraitMode !== "render"}
+                      width="1536"
+                      height="1536"
+                    />
+                  </div>
+                  <span className="portrait-source">{portraitMode === "photo" ? "ORIGINAL FRAME" : "3D STUDY"}</span>
+                  <figcaption className="portrait-caption"><b>BAO TRAN</b><span>SOFTWARE ENGINEER · AI BUILDER</span></figcaption>
+                </figure>
+
+                <div className="portrait-focus"><small>CURRENTLY EXPLORING</small><strong>AGENTS × DEV TOOLS</strong></div>
+              </div>
+              <div className="thread-foot"><span>FAIRFAX / VA</span><span>CS @ GMU · AVAILABLE FALL &apos;26</span></div>
+            </div>
+
+            <div className="hero-index" aria-hidden="true">1301</div>
+          </div>
         </section>
 
         <section className="statement-strip" aria-label="Portfolio summary">
