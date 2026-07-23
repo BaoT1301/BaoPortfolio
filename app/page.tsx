@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight } from "@phosphor-icons/react";
 import BuildArtifact from "./BuildArtifact";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -562,7 +563,7 @@ export default function Home() {
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="header-resume" href={resumeUrl} target="_blank" rel="noreferrer">Résumé ↗</a>
+        <a className="header-resume" href={resumeUrl} target="_blank" rel="noreferrer">Résumé <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a>
       </header>
 
       <div className="portfolio-grid">
@@ -578,9 +579,9 @@ export default function Home() {
             <p className="identity-note">Right now I am exploring agent tooling, developer infrastructure, and AI products built for real users.</p>
             <div className="chapter-status"><span>Current chapter</span><strong>{activeChapter}</strong></div>
             <div className="identity-links">
-              <a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>
-              <a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-              <a href={emailUrl}>Email ↗</a>
+              <a href={githubUrl} target="_blank" rel="noreferrer">GitHub <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a>
+              <a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a>
+              <a href={emailUrl}>Email <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a>
             </div>
           </div>
         </aside>
@@ -634,7 +635,7 @@ export default function Home() {
                   <strong>{project.question}</strong>
                   <p>{project.description}</p>
                   <div className="project-proof"><span>What it proved</span><p>{project.result}</p></div>
-                  <footer><span>{project.tech.join(" / ")}</span><a href={project.href} target="_blank" rel="noreferrer">open project ↗</a></footer>
+                  <footer><span>{project.tech.join(" / ")}</span><a href={project.href} target="_blank" rel="noreferrer">open project <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a></footer>
                 </div>
               </article>
               <div className="project-tabs" role="tablist" aria-label="Projects">
@@ -667,7 +668,7 @@ export default function Home() {
                   <div className="experience-company"><small>{item.context}</small><h3>{item.company}</h3></div>
                   <div className="experience-role"><strong>{item.role}</strong><span>{item.date}</span></div>
                   <p>{item.description}</p>
-                  <span className="experience-arrow" aria-hidden="true">↗</span>
+                  <ArrowUpRight className="experience-arrow external-arrow" weight="regular" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -706,12 +707,12 @@ export default function Home() {
             <div className="contact-panel">
               <p>Have a hard problem?</p>
               <a className="contact-email" href={emailUrl}>baotran.swe@gmail.com</a>
-              <div className="contact-actions"><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a><button type="button" onClick={copyEmail}>{copied ? "email copied" : "copy email"}</button></div>
+              <div className="contact-actions"><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a><a href={githubUrl} target="_blank" rel="noreferrer">GitHub <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a><button type="button" onClick={copyEmail}>{copied ? "email copied" : "copy email"}</button></div>
             </div>
             <footer className="site-footer">
               <div className="footer-statement"><span>LAST NOTE / 2026</span><strong>Make something useful.</strong></div>
               <div className="footer-note"><span>Software engineer</span><span>Washington DC</span><span>Available Fall 2026 and Summer 2027</span></div>
-              <nav aria-label="Footer navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#toolkit">Toolkit</a><a href={resumeUrl} target="_blank" rel="noreferrer">Résumé ↗</a></nav>
+              <nav aria-label="Footer navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#toolkit">Toolkit</a><a href={resumeUrl} target="_blank" rel="noreferrer">Résumé <ArrowUpRight className="external-arrow" weight="regular" aria-hidden="true" /></a></nav>
               <div className="footer-bottom"><small>© 2026 Bao Tran. Built with curiosity and too many tabs.</small><a href="#top">Back to top ↑</a></div>
             </footer>
           </section>

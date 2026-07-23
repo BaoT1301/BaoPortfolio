@@ -27,20 +27,20 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   authors: [{ name: "Bao Tran" }],
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: { icon: "/favicon-build.svg", shortcut: "/favicon-build.svg" },
   openGraph: {
     title: "Bao Tran | Software Engineer + AI Builder",
     description: "I build the thing. Then I make it worth using.",
     url: "/",
     siteName: "Bao Tran Portfolio",
-    images: [{ url: "/og-2026-v2.png", width: 1731, height: 909, alt: "Bao Tran, Software Engineer and AI Builder" }],
+    images: [{ url: "/og-current.png", width: 1731, height: 909, alt: "Bao Tran, Software Engineer and AI Builder" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Bao Tran | Software Engineer + AI Builder",
     description: "I build the thing. Then I make it worth using.",
-    images: ["/og-2026-v2.png"],
+    images: ["/og-current.png"],
   },
 };
 
