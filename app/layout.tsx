@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     description: "I build the thing. Then I make it worth using.",
     url: "/",
     siteName: "Bao Tran Portfolio",
-    images: [{ url: "/og-2026.png", width: 1731, height: 909, alt: "Bao Tran, Software Engineer and AI Builder" }],
+    images: [{ url: "/og-2026-v2.png", width: 1731, height: 909, alt: "Bao Tran, Software Engineer and AI Builder" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Bao Tran | Software Engineer + AI Builder",
     description: "I build the thing. Then I make it worth using.",
-    images: ["/og-2026.png"],
+    images: ["/og-2026-v2.png"],
   },
 };
 

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -15,7 +14,6 @@ const linkedinUrl = "https://www.linkedin.com/in/baot1301/";
 
 const projects = [
   {
-    number: "01",
     title: "Orchestrator Studio",
     label: "Multi agent developer tool",
     question: "Can one developer direct a small team of agents without losing the thread?",
@@ -27,7 +25,6 @@ const projects = [
     visual: "orchestrator",
   },
   {
-    number: "02",
     title: "AI Hire AI",
     label: "Agent experiment",
     question: "What changes when both sides of hiring have an agent?",
@@ -39,7 +36,6 @@ const projects = [
     visual: "hire",
   },
   {
-    number: "03",
     title: "CollabGuard",
     label: "AI moderation system",
     question: "Can moderation move faster without removing human judgment?",
@@ -51,7 +47,6 @@ const projects = [
     visual: "guard",
   },
   {
-    number: "04",
     title: "Crypto Pilot",
     label: "Real time trading",
     question: "How do you make a fast market feel understandable?",
@@ -63,7 +58,6 @@ const projects = [
     visual: "market",
   },
   {
-    number: "05",
     title: "Crushie",
     label: "Gamified learning",
     question: "Can social confidence be practiced like any other skill?",
@@ -75,7 +69,6 @@ const projects = [
     visual: "social",
   },
   {
-    number: "06",
     title: "PathAI",
     label: "AI job search",
     question: "What if a job search understood direction, not just keywords?",
@@ -87,7 +80,6 @@ const projects = [
     visual: "path",
   },
   {
-    number: "07",
     title: "FusionAI",
     label: "Research assistant",
     question: "Can research synthesis stay fast without hiding its sources?",
@@ -158,75 +150,124 @@ const toolGroups = [
   { name: "AI", tools: ["LLMs", "Agents", "RAG", "Automation", "Evaluation"] },
 ];
 
+const buildSteps = ["notice", "ask", "sketch", "build", "break", "listen", "rebuild", "ship"];
+
 function ProjectArtwork({ type }: { type: string }) {
   if (type === "orchestrator") {
     return (
-      <div className="project-artwork product-scene scene-orchestrator" aria-hidden="true">
-        <div className="scene-bar"><span>ORCHESTRATOR / RUN 014</span><i>LIVE</i></div>
-        <div className="brief-card"><small>ONE BRIEF</small><strong>Build the onboarding flow</strong><span>4 workstreams created</span></div>
-        <div className="agent-board">
-          {[["01", "PLAN"], ["02", "API"], ["03", "UI"], ["04", "TEST"]].map(([number, label]) => <div key={label}><i>{number}</i><strong>{label}</strong><small>ready</small></div>)}
+      <div className="project-artwork orchestrator-product-preview" aria-hidden="true">
+        <div className="orchestrator-window">
+          <div className="orchestrator-chrome">
+            <span className="window-dots"><i /><i /><i /></span>
+            <strong>forge / add-auth-login</strong>
+            <b>●</b>
+          </div>
+          <div className="orchestrator-tabs">
+            <span className="active">Plan</span><span>Run</span><span>Merge</span>
+            <small>3 tracks · 1 dependency</small>
+            <b>Run plan ↗</b>
+          </div>
+          <div className="orchestrator-flow">
+            <div className="workflow-links">
+              <i className="link-prompt" /><i className="link-branch" /><i className="link-merge" />
+              <span className="signal-one" /><span className="signal-two" />
+            </div>
+            <div className="workflow-node prompt-node"><small>Prompt</small><strong>Add OAuth login and session refresh</strong></div>
+            <div className="workflow-node architect-node"><small>Gemini</small><strong>Architect</strong><span>Planned 3 tracks</span></div>
+            <div className="track-stack">
+              <div><span>frontend</span><b>running</b><i /></div>
+              <div><span>backend</span><b>running</b><i /></div>
+              <div><span>tests</span><b>queued</b><i /></div>
+            </div>
+            <div className="workflow-node merge-node"><small>main</small><strong>Auto merge</strong><span>in dependency order</span></div>
+          </div>
         </div>
-        <div className="merge-card"><span>4 branches</span><strong>MERGED TO MAIN ✓</strong></div>
       </div>
     );
   }
   if (type === "hire") {
     return (
-      <div className="project-artwork product-scene scene-hire" aria-hidden="true">
-        <div className="scene-bar"><span>AI HIRE AI / MATCH 006</span><i>92%</i></div>
-        <div className="profile-card candidate-card"><small>CANDIDATE AGENT</small><b>BAO T.</b><span>18 roles prepared</span><i>skills verified</i></div>
-        <div className="match-bridge"><span>evidence</span><b>↔</b><span>criteria</span></div>
-        <div className="profile-card recruiter-card"><small>RECRUITER AGENT</small><b>PLATFORM TEAM</b><span>6 strong matches</span><i>packet ready</i></div>
+      <div className="project-artwork product-ui-preview ui-hire" aria-hidden="true">
+        <div className="product-ui-window">
+          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>AI Hire AI / candidate 028</strong><b>Interview</b></div>
+          <div className="product-ui-body hire-workspace">
+            <div className="hire-pipeline"><span>Applied</span><span>Phone screen</span><span className="active">Interview</span><span>Offer</span></div>
+            <div className="hire-actions"><b>Start live interview</b><span>Add note</span><span>Move stage</span></div>
+            <div className="candidate-dossier"><small>Candidate evidence</small><strong>Bao Tran</strong><p>Systems engineer with verified product experience.</p><div><span>TypeScript</span><span>Agents</span><span>AWS</span></div></div>
+            <div className="risk-review"><small>Risk flags</small><strong>Traditional ML depth</strong><p>Follow up in the next interview round.</p><i /></div>
+            <div className="hire-summary"><span>Evidence packet</span><b>Ready for review</b><em>92% fit</em></div>
+          </div>
+        </div>
       </div>
     );
   }
   if (type === "guard") {
     return (
-      <div className="project-artwork product-scene scene-guard" aria-hidden="true">
-        <div className="scene-bar"><span>COLLABGUARD / MOD QUEUE</span><i>03 OPEN</i></div>
-        <div className="queue-card"><small>SHARED QUEUE</small><strong>r/developers</strong><span>semantic review</span><b>HIGH</b></div>
-        <div className="case-card"><small>CASE / 06 024</small><strong>“You keep posting this link in every thread.”</strong><div><span>SEMANTIC RISK</span><b>0.84</b></div><i /></div>
-        <div className="decision-card"><span>AI surfaces evidence</span><strong>HUMAN DECIDES</strong></div>
+      <div className="project-artwork product-ui-preview ui-guard" aria-hidden="true">
+        <div className="product-ui-window">
+          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>CollabGuard / shared queue</strong><b>3 open</b></div>
+          <div className="product-ui-body guard-workspace">
+            <div className="moderation-queue"><small>Queue</small><div className="active"><strong>r/developers</strong><span>semantic review</span><b>high</b></div><div><strong>r/startups</strong><span>possible spam</span><b>med</b></div><div><strong>r/programming</strong><span>context check</span><b>low</b></div></div>
+            <div className="moderation-case"><small>Case 06 024</small><strong>“You keep posting this link in every thread.”</strong><div className="risk-meter"><span>Semantic risk</span><b>0.84</b><i /></div><div className="evidence-tags"><span>repeated link</span><span>hostile tone</span><span>3 reports</span></div></div>
+            <div className="moderation-actions"><span>Gentle nudge</span><span>Start vote</span><b>Human review</b></div>
+          </div>
+        </div>
       </div>
     );
   }
   if (type === "market") {
     return (
-      <div className="project-artwork product-scene scene-market" aria-hidden="true">
-        <div className="scene-bar"><span>CRYPTO PILOT / BTC USD</span><i>LIVE</i></div>
-        <div className="price-card"><small>BITCOIN</small><strong>$67,842</strong><span>+ 2.8% TODAY</span></div>
-        <div className="chart-card"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
-        <div className="order-card"><small>MARKET ORDER</small><strong>0.014 BTC</strong><span>READY TO REVIEW →</span></div>
+      <div className="project-artwork product-ui-preview ui-market" aria-hidden="true">
+        <div className="product-ui-window">
+          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>Crypto Pilot / BTC USD</strong><b>Live</b></div>
+          <div className="product-ui-body market-workspace">
+            <div className="market-watch"><small>Market</small><div className="active"><b>BTC</b><span>$67,842</span><em>+2.8%</em></div><div><b>ETH</b><span>$3,842</span><em>+1.4%</em></div><div><b>SOL</b><span>$174.20</span><em>+3.1%</em></div></div>
+            <div className="market-chart"><div><small>Bitcoin</small><strong>$67,842.18</strong><span>1D</span></div><section>{[34, 46, 39, 58, 53, 70, 66, 82, 75, 91, 86, 96].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}</section><footer><span>09:00</span><span>12:00</span><span>15:00</span></footer></div>
+            <div className="order-ticket"><small>Market order</small><label><span>Amount</span><b>0.014 BTC</b></label><label><span>Est. total</span><b>$949.79</b></label><strong>Review order</strong></div>
+          </div>
+        </div>
       </div>
     );
   }
   if (type === "social") {
     return (
-      <div className="project-artwork product-scene scene-social" aria-hidden="true">
-        <div className="scene-bar"><span>CRUSHIE / MISSION 04</span><i>LEVEL UP</i></div>
-        <div className="coach-card"><small>AI COACH</small><strong>Start with one curious question.</strong><span>tone: warm · direct</span></div>
-        <div className="score-orbit"><b>78</b><span>confidence</span><i /></div>
-        <div className="mission-panel"><small>TODAY</small><strong>Start the conversation</strong><span>listen → notice → respond</span></div>
+      <div className="project-artwork product-ui-preview ui-social" aria-hidden="true">
+        <div className="product-ui-window">
+          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>Crushie / vibe profile</strong><b>Level 04</b></div>
+          <div className="product-ui-body social-workspace">
+            <div className="vibe-profile"><small>Personality DNA</small><div className="vibe-avatar">C</div><strong>Creative romantic</strong><span>1536 dimensions analyzed</span><div><i>Romantic</i><i>Curious</i><i>Warm</i></div></div>
+            <div className="siq-score"><b>78</b><span>SIQ</span><i /></div>
+            <div className="coach-panel"><small>AI coach</small><strong>Start with one curious question.</strong><span>Tone: warm and direct</span><div><b>Listen</b><b>Notice</b><b>Respond</b></div></div>
+            <div className="mission-progress"><span>Today’s mission</span><strong>Start the conversation</strong><i /></div>
+          </div>
+        </div>
       </div>
     );
   }
   if (type === "path") {
     return (
-      <div className="project-artwork product-scene scene-path" aria-hidden="true">
-        <div className="scene-bar"><span>PATHAI / ROLE MAP</span><i>28 FOUND</i></div>
-        <div className="resume-card"><small>YOUR TRAJECTORY</small><strong>Backend → AI Systems</strong><span>7 signals extracted</span></div>
-        <div className="path-line"><i /><i /><i /><b>→</b></div>
-        <div className="matches-card"><small>BEST FIT</small><div><b>92%</b><span>AI Platform Engineer</span></div><div><b>88%</b><span>Backend Engineer</span></div><div><b>84%</b><span>Developer Tools</span></div></div>
+      <div className="project-artwork product-ui-preview ui-path" aria-hidden="true">
+        <div className="product-ui-window">
+          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>PathAI / trajectory scan</strong><b>50,247 roles</b></div>
+          <div className="product-ui-body path-workspace">
+            <div className="career-profile"><small>Extracted signals</small><strong>Backend to AI systems</strong><span>7 signals found</span><div><b>Python</b><b>Agents</b><b>Leadership</b><b>System design</b></div></div>
+            <div className="match-list"><small>Selected matches</small><div className="top"><b>98%</b><span><strong>Principal Engineer</strong><em>Stripe · Top pick</em></span></div><div><b>94%</b><span><strong>AI Research Lead</strong><em>OpenAI · Strong fit</em></span></div><div><b>91%</b><span><strong>ML Architect</strong><em>Anthropic · High match</em></span></div></div>
+            <div className="path-status"><span>Profile verified</span><i /><span>Match ranked</span><i /><b>Fast track ready</b></div>
+          </div>
+        </div>
       </div>
     );
   }
   return (
-    <div className="project-artwork product-scene scene-research" aria-hidden="true">
-      <div className="scene-bar"><span>FUSIONAI / RESEARCH 031</span><i>SOURCED</i></div>
-      <div className="sources-card"><small>SEARCHING IN PARALLEL</small><span>WIKIPEDIA</span><span>OPEN WEB</span><span>GPT</span></div>
-      <div className="source-connector"><i /><i /><i /></div>
-      <div className="answer-card"><small>SYNTHESIZED ANSWER</small><strong>One useful explanation.</strong><p>Clear synthesis with every supporting source still visible.</p><span>[1] [2] [3]</span></div>
+    <div className="project-artwork product-ui-preview ui-research" aria-hidden="true">
+      <div className="product-ui-window">
+        <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>FusionAI / research 031</strong><b>Sourced</b></div>
+        <div className="product-ui-body research-workspace">
+          <div className="research-query"><span>How do agent systems coordinate work?</span><b>Search ↗</b></div>
+          <div className="research-sources"><small>Searching in parallel</small><div><i />Wikipedia <b>ready</b></div><div><i />Open web <b>ready</b></div><div><i />GPT 4o mini <b>ready</b></div></div>
+          <div className="research-answer"><small>Synthesized answer</small><strong>Coordination needs shared state, clear ownership, and ordered handoffs.</strong><p>FusionAI combines three research paths into one explanation while keeping every supporting source visible.</p><div><span>[1]</span><span>[2]</span><span>[3]</span></div></div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -288,27 +329,48 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const root = siteRef.current;
+    const supportsPointerMotion = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    if (!root || !supportsPointerMotion.matches) return;
+
+    const surfaces = Array.from(root.querySelectorAll<HTMLElement>("[data-pointer-surface]"));
+    const cleanups = surfaces.map((surface) => {
+      const handlePointerMove = (event: PointerEvent) => {
+        const bounds = surface.getBoundingClientRect();
+        const x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+        const y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
+        surface.style.setProperty("--pointer-x", `${x * 100}%`);
+        surface.style.setProperty("--pointer-y", `${y * 100}%`);
+        surface.style.setProperty("--tilt-x", `${(x - 0.5) * 1.6}deg`);
+        surface.style.setProperty("--tilt-y", `${(0.5 - y) * 1.2}deg`);
+        surface.style.setProperty("--photo-x", `${(x - 0.5) * 5}px`);
+        surface.style.setProperty("--photo-y", `${(y - 0.5) * 5}px`);
+      };
+      const handlePointerLeave = () => {
+        surface.style.setProperty("--pointer-x", "50%");
+        surface.style.setProperty("--pointer-y", "50%");
+        surface.style.setProperty("--tilt-x", "0deg");
+        surface.style.setProperty("--tilt-y", "0deg");
+        surface.style.setProperty("--photo-x", "0px");
+        surface.style.setProperty("--photo-y", "0px");
+      };
+
+      surface.addEventListener("pointermove", handlePointerMove);
+      surface.addEventListener("pointerleave", handlePointerLeave);
+      return () => {
+        surface.removeEventListener("pointermove", handlePointerMove);
+        surface.removeEventListener("pointerleave", handlePointerLeave);
+      };
+    });
+
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, [activeProject]);
+
   const copyEmail = async () => {
     await navigator.clipboard.writeText("baotran.swe@gmail.com");
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1600);
-  };
-
-  const moveMotionField = (event: ReactPointerEvent<HTMLElement>) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const field = event.currentTarget;
-    const bounds = field.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    field.querySelectorAll<HTMLElement>(".motion-piece").forEach((piece, index) => {
-      const depth = 3 + (index % 3) * 2;
-      gsap.to(piece, { x: x * depth, y: y * depth, duration: 0.48, ease: "power3.out", overwrite: "auto" });
-    });
-  };
-
-  const resetMotionField = (event: ReactPointerEvent<HTMLElement>) => {
-    const field = event.currentTarget;
-    gsap.to(field.querySelectorAll<HTMLElement>(".motion-piece"), { x: 0, y: 0, duration: 0.65, ease: "power3.out", overwrite: "auto" });
   };
 
   return (
@@ -316,25 +378,25 @@ export default function Home() {
       <header className="site-topbar">
         <a className="wordmark" href="#top"><i className="brand-signal" aria-hidden="true" /><span>Bao Tran</span><small>Software engineer</small></a>
         <nav aria-label="Primary navigation">
-          <a href="#work"><span>01</span>Work</a>
-          <a href="#story"><span>02</span>Story</a>
-          <a href="#experience"><span>03</span>Experience</a>
-          <a href="#contact"><span>04</span>Contact</a>
+          <a href="#work">Work</a>
+          <a href="#story">Story</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
         </nav>
-        <a className="header-resume" href={resumeUrl} target="_blank" rel="noreferrer"><span>05</span>Résumé ↗</a>
+        <a className="header-resume" href={resumeUrl} target="_blank" rel="noreferrer">Résumé ↗</a>
       </header>
 
       <div className="portfolio-grid">
         <aside className="identity-column" aria-label="About Bao Tran">
-          <div className="identity-card">
-            <div className="card-meta"><span>PROFILE / BT 01</span><span>WASHINGTON DC</span></div>
-            <div className="portrait-window motion-field" onPointerMove={moveMotionField} onPointerLeave={resetMotionField}>
+          <div className="identity-card" data-pointer-surface="profile">
+            <div className="card-meta"><span>PROFILE / BAO TRAN</span><span>WASHINGTON DC</span></div>
+            <div className="portrait-window">
               <Image src="/bao-tran-photo-original.png" alt="Portrait of Bao Tran" fill sizes="(max-width: 820px) 88vw, 31vw" priority unoptimized />
-              <div className="identity-art" aria-hidden="true"><i className="motion-piece" /><i className="motion-piece" /><i className="motion-piece" /><i className="motion-piece" /></div>
             </div>
             <div className="identity-title"><h2>Bao Tran</h2><span>Software Engineer<br />AI Builder</span></div>
             <div className="identity-route" aria-hidden="true"><i /><em className="route-progress" /><b className="route-marker">→</b></div>
             <p className="identity-bio">A CS student at George Mason University building production APIs, AI systems, and full stack products.</p>
+            <p className="identity-note">Right now I am exploring agent tooling, developer infrastructure, and AI products built for real users.</p>
             <div className="chapter-status"><span>Current chapter</span><strong>{activeChapter}</strong></div>
             <div className="identity-links">
               <a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -361,29 +423,33 @@ export default function Home() {
           </section>
 
           <section className="story-section notice-section" id="story" data-chapter="Notice the friction">
-            <div className="chapter-heading"><span>01 / NOTICE</span><p>Where every project starts</p></div>
+            <div className="chapter-heading"><span>NOTICE</span><p>Where every project starts</p></div>
             <div className="chapter-body">
               <h2>Most of my projects begin with something I cannot stop <em className="accent-orange">noticing.</em></h2>
               <p>A workflow that wastes time. A decision with missing context. A useful idea trapped behind a bad interface. Curiosity gets me started, but usefulness decides what survives.</p>
             </div>
             <div className="process-note" aria-label="Bao's build process">
               <span>HOW I WORK</span>
-              <p>notice / ask / sketch / build / break / listen / rebuild / ship</p>
+              <p className="process-steps">
+                {buildSteps.map((step, index) => (
+                  <span key={step}><b>{step}</b>{index < buildSteps.length - 1 && <i>/</i>}</span>
+                ))}
+              </p>
             </div>
           </section>
 
           <section className="story-section work-section" id="work" data-chapter="Build an answer">
-            <div className="chapter-heading"><span>02 / BUILD</span><p>Seven questions, seven working answers</p></div>
+            <div className="chapter-heading"><span>BUILD</span><p>Seven questions, seven working answers</p></div>
             <div className="chapter-body">
               <h2>I learn faster when the idea has to become <em className="accent-violet">real.</em></h2>
               <p>Choose a question. Each project is the system I built to answer it.</p>
             </div>
             <div className="project-workbench">
               <article className={`project-stage project-stage-${project.visual}`} id="project-panel" role="tabpanel" key={project.title}>
-                <div className="project-visual"><ProjectArtwork type={project.visual} /></div>
+                <div className="project-visual" data-pointer-surface="project"><ProjectArtwork type={project.visual} /></div>
                 <div className="project-story">
                   <div className="panel-meta"><span>{project.label}</span><b>{project.status}</b></div>
-                  <p className="project-number">PROJECT {project.number}</p>
+                  <p className="project-number">SELECTED PROJECT</p>
                   <h3>{project.title}</h3>
                   <strong>{project.question}</strong>
                   <p>{project.description}</p>
@@ -402,7 +468,7 @@ export default function Home() {
                     onClick={() => setActiveProject(index)}
                     key={item.title}
                   >
-                    <span>{item.number}</span><strong>{item.title}</strong>
+                    <strong>{item.title}</strong>
                   </button>
                 ))}
               </div>
@@ -410,15 +476,14 @@ export default function Home() {
           </section>
 
           <section className="story-section experience-section" id="experience" data-chapter="Meet real constraints">
-            <div className="chapter-heading"><span>03 / SHIP</span><p>Where the work met reality</p></div>
+            <div className="chapter-heading"><span>SHIP</span><p>Where the work met reality</p></div>
             <div className="chapter-body">
               <h2>Then the work meets users, deadlines, and <em className="accent-green">production.</em></h2>
               <p>These are the places that taught me how an idea changes when other people depend on it.</p>
             </div>
             <div className="experience-list">
-              {experiences.map((item, index) => (
+              {experiences.map((item) => (
                 <a className="experience-row" href={item.href} target="_blank" rel="noreferrer" key={item.company}>
-                  <span className="experience-number">0{index + 1}</span>
                   <div className="experience-company"><small>{item.context}</small><h3>{item.company}</h3></div>
                   <div className="experience-role"><strong>{item.role}</strong><span>{item.date}</span></div>
                   <p>{item.description}</p>
@@ -429,7 +494,7 @@ export default function Home() {
           </section>
 
           <section className="story-section toolkit-section" id="toolkit" data-chapter="Choose the right tool">
-            <div className="chapter-heading"><span>04 / TOOLKIT</span><p>Tools are choices, not identity</p></div>
+            <div className="chapter-heading"><span>TOOLKIT</span><p>Tools are choices, not identity</p></div>
             <div className="chapter-body">
               <h2>The stack changes. The habit of choosing deliberately <em className="accent-yellow">does not.</em></h2>
               <p className="toolkit-note">I reach for <strong>Python</strong> when the system needs depth, <strong>TypeScript</strong> when people need to touch it, and <strong>infrastructure</strong> when the prototype has to become dependable.</p>
@@ -437,7 +502,6 @@ export default function Home() {
             <div className="tool-rack">
               {toolGroups.map((group, index) => (
                 <article key={group.name}>
-                  <span className="tool-index">0{index + 1}</span>
                   <h3>{group.name}</h3>
                   <div className="stack-marquee" aria-label={`${group.name}: ${group.tools.join(", ")}`}>
                     <div className={`stack-track ${index % 2 === 0 ? "moves-left" : "moves-right"}`}>
@@ -454,14 +518,14 @@ export default function Home() {
           </section>
 
           <section className="story-section next-section" id="contact" data-chapter="Ask the next question">
-            <div className="chapter-heading"><span>05 / NEXT</span><p>The story is still being written</p></div>
+            <div className="chapter-heading"><span>NEXT</span><p>The story is still being written</p></div>
             <div className="chapter-body">
               <h2>What should agents do after <em className="accent-pink">“hello world”?</em></h2>
               <p>I am exploring agent observability, human judgment in automated workflows, developer tools, and AI native interfaces.</p>
             </div>
             <div className="contact-panel">
               <p>Have a hard problem?</p>
-              <a className="contact-email" href={emailUrl}>baotran.swe<br />@gmail.com</a>
+              <a className="contact-email" href={emailUrl}>baotran.swe@gmail.com</a>
               <div className="contact-actions"><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a><button type="button" onClick={copyEmail}>{copied ? "email copied" : "copy email"}</button></div>
             </div>
             <footer className="site-footer">
