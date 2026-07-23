@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BuildArtifact from "./BuildArtifact";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const resumeUrl = "https://drive.google.com/file/d/1lxAJD1Zw0EKxDiHWaAneEMxKSwPZEYo8/view?usp=sharing";
 const emailUrl = "mailto:baotran.swe@gmail.com";
@@ -155,31 +157,40 @@ const buildSteps = ["notice", "ask", "sketch", "build", "break", "listen", "rebu
 function ProjectArtwork({ type }: { type: string }) {
   if (type === "orchestrator") {
     return (
-      <div className="project-artwork orchestrator-product-preview" aria-hidden="true">
-        <div className="orchestrator-window">
-          <div className="orchestrator-chrome">
-            <span className="window-dots"><i /><i /><i /></span>
-            <strong>forge / add-auth-login</strong>
-            <b>●</b>
-          </div>
-          <div className="orchestrator-tabs">
-            <span className="active">Plan</span><span>Run</span><span>Merge</span>
-            <small>3 tracks · 1 dependency</small>
-            <b>Run plan ↗</b>
-          </div>
-          <div className="orchestrator-flow">
-            <div className="workflow-links">
-              <i className="link-prompt" /><i className="link-branch" /><i className="link-merge" />
-              <span className="signal-one" /><span className="signal-two" />
+      <div className="project-artwork product-still still-orchestrator" aria-hidden="true">
+        <div className="still-frame">
+          <div className="still-meta"><span>One brief</span><b>Merged to main</b></div>
+          <div className="orchestrator-map">
+            <div className="map-card map-brief"><small>Brief</small><strong>Add OAuth login and session refresh</strong></div>
+            <i className="flow-main-fill" />
+            <div className="map-card map-architect">
+              <small>Gemini</small>
+              <strong>Architect</strong>
+              <span className="node-copy">Plans the work</span>
+              <span className="node-state"><b className="state-processing">Planning</b><b className="state-ready">Plan ready</b></span>
+              <span className="node-progress"><i /></span>
             </div>
-            <div className="workflow-node prompt-node"><small>Prompt</small><strong>Add OAuth login and session refresh</strong></div>
-            <div className="workflow-node architect-node"><small>Gemini</small><strong>Architect</strong><span>Planned 3 tracks</span></div>
-            <div className="track-stack">
-              <div><span>frontend</span><b>running</b><i /></div>
-              <div><span>backend</span><b>running</b><i /></div>
-              <div><span>tests</span><b>queued</b><i /></div>
+            <div className="map-branches">
+              <i className="branch-trunk branch-trunk-in"><b /></i>
+              <i className="branch-trunk branch-trunk-out"><b /></i>
+              <div className="map-track map-track-a">
+                <small>Track A</small><strong>Frontend</strong>
+                <span className="node-state"><b className="state-processing">Processing</b><b className="state-ready">Ready</b></span>
+                <span className="node-progress"><i /></span>
+              </div>
+              <div className="map-track map-track-b">
+                <small>Track B</small><strong>Backend</strong>
+                <span className="node-state"><b className="state-processing">Processing</b><b className="state-ready">Ready</b></span>
+                <span className="node-progress"><i /></span>
+              </div>
+              <div className="map-track map-track-c">
+                <small>Track C</small><strong>Tests</strong>
+                <span className="node-state"><b className="state-processing">Processing</b><b className="state-ready">Ready</b></span>
+                <span className="node-progress"><i /></span>
+              </div>
             </div>
-            <div className="workflow-node merge-node"><small>main</small><strong>Auto merge</strong><span>in dependency order</span></div>
+            <div className="map-card map-merge"><small>Shared branch</small><strong>Ordered merge</strong><span>Working commits</span></div>
+            <div className="merge-confirmation"><span>Main</span><strong>Merged</strong><small>Frontend + backend + tests</small></div>
           </div>
         </div>
       </div>
@@ -187,15 +198,19 @@ function ProjectArtwork({ type }: { type: string }) {
   }
   if (type === "hire") {
     return (
-      <div className="project-artwork product-ui-preview ui-hire" aria-hidden="true">
-        <div className="product-ui-window">
-          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>AI Hire AI / candidate 028</strong><b>Interview</b></div>
-          <div className="product-ui-body hire-workspace">
-            <div className="hire-pipeline"><span>Applied</span><span>Phone screen</span><span className="active">Interview</span><span>Offer</span></div>
-            <div className="hire-actions"><b>Start live interview</b><span>Add note</span><span>Move stage</span></div>
-            <div className="candidate-dossier"><small>Candidate evidence</small><strong>Bao Tran</strong><p>Systems engineer with verified product experience.</p><div><span>TypeScript</span><span>Agents</span><span>AWS</span></div></div>
-            <div className="risk-review"><small>Risk flags</small><strong>Traditional ML depth</strong><p>Follow up in the next interview round.</p><i /></div>
-            <div className="hire-summary"><span>Evidence packet</span><b>Ready for review</b><em>92% fit</em></div>
+      <div className="project-artwork product-still still-hire" aria-hidden="true">
+        <div className="still-frame">
+          <div className="still-meta"><span>Two sided agents</span><b>Human review gate</b></div>
+          <div className="interview-scene">
+            <i className="interview-signal" />
+            <div className="agent agent-candidate"><small>Candidate agent</small><strong>Tailors the application</strong><span>Resume + role context</span></div>
+            <div className="interview-transcript">
+              <small>Interview exchange</small>
+              <p><b>Recruiter</b> Tell me about a system you shipped.</p>
+              <p><b>Candidate</b> I built an agent workflow that turns one brief into reviewed commits.</p>
+            </div>
+            <div className="agent agent-recruiter"><small>Recruiter agent</small><strong>Builds the evidence packet</strong><span>Links + notes + signals</span></div>
+            <div className="evidence-packet"><span>Application</span><span>Interview</span><span>Public work</span><b>Ready for review</b></div>
           </div>
         </div>
       </div>
@@ -203,13 +218,14 @@ function ProjectArtwork({ type }: { type: string }) {
   }
   if (type === "guard") {
     return (
-      <div className="project-artwork product-ui-preview ui-guard" aria-hidden="true">
-        <div className="product-ui-window">
-          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>CollabGuard / shared queue</strong><b>3 open</b></div>
-          <div className="product-ui-body guard-workspace">
-            <div className="moderation-queue"><small>Queue</small><div className="active"><strong>r/developers</strong><span>semantic review</span><b>high</b></div><div><strong>r/startups</strong><span>possible spam</span><b>med</b></div><div><strong>r/programming</strong><span>context check</span><b>low</b></div></div>
-            <div className="moderation-case"><small>Case 06 024</small><strong>“You keep posting this link in every thread.”</strong><div className="risk-meter"><span>Semantic risk</span><b>0.84</b><i /></div><div className="evidence-tags"><span>repeated link</span><span>hostile tone</span><span>3 reports</span></div></div>
-            <div className="moderation-actions"><span>Gentle nudge</span><span>Start vote</span><b>Human review</b></div>
+      <div className="project-artwork product-still still-guard" aria-hidden="true">
+        <div className="still-frame">
+          <div className="still-meta"><span>Shared moderation queue</span><b>Human controlled</b></div>
+          <div className="moderation-flow">
+            <i className="moderation-signal" />
+            <div className="case-card"><small>Reported comment</small><strong>“You keep posting this link in every thread.”</strong><span>r/developers</span></div>
+            <div className="evidence-card"><small>Evidence gathered</small><span>Repeated link</span><span>Thread context</span><span>Community reports</span></div>
+            <div className="decision-card"><small>Moderator decides</small><strong>Review the context</strong><div><span>Gentle nudge</span><span>Start vote</span></div><b>Final action stays human</b></div>
           </div>
         </div>
       </div>
@@ -217,13 +233,16 @@ function ProjectArtwork({ type }: { type: string }) {
   }
   if (type === "market") {
     return (
-      <div className="project-artwork product-ui-preview ui-market" aria-hidden="true">
-        <div className="product-ui-window">
-          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>Crypto Pilot / BTC USD</strong><b>Live</b></div>
-          <div className="product-ui-body market-workspace">
-            <div className="market-watch"><small>Market</small><div className="active"><b>BTC</b><span>$67,842</span><em>+2.8%</em></div><div><b>ETH</b><span>$3,842</span><em>+1.4%</em></div><div><b>SOL</b><span>$174.20</span><em>+3.1%</em></div></div>
-            <div className="market-chart"><div><small>Bitcoin</small><strong>$67,842.18</strong><span>1D</span></div><section>{[34, 46, 39, 58, 53, 70, 66, 82, 75, 91, 86, 96].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}</section><footer><span>09:00</span><span>12:00</span><span>15:00</span></footer></div>
-            <div className="order-ticket"><small>Market order</small><label><span>Amount</span><b>0.014 BTC</b></label><label><span>Est. total</span><b>$949.79</b></label><strong>Review order</strong></div>
+      <div className="project-artwork product-still still-market" aria-hidden="true">
+        <div className="still-frame">
+          <div className="still-meta"><span>Live market</span><b>Review before submit</b></div>
+          <div className="trading-scene">
+            <div className="market-title"><small>BTC / USD</small><strong>Price movement, without the noise.</strong><span>Live WebSocket feed</span></div>
+            <div className="market-bars">
+              {[32, 45, 37, 56, 48, 67, 59, 77, 69, 86, 79, 93].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
+              <span className="market-scan" />
+            </div>
+            <div className="trade-ticket"><small>Limit order</small><div><span>Side</span><b>Buy</b></div><div><span>Asset</span><b>Bitcoin</b></div><strong>Review order</strong></div>
           </div>
         </div>
       </div>
@@ -231,14 +250,18 @@ function ProjectArtwork({ type }: { type: string }) {
   }
   if (type === "social") {
     return (
-      <div className="project-artwork product-ui-preview ui-social" aria-hidden="true">
-        <div className="product-ui-window">
-          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>Crushie / vibe profile</strong><b>Level 04</b></div>
-          <div className="product-ui-body social-workspace">
-            <div className="vibe-profile"><small>Personality DNA</small><div className="vibe-avatar">C</div><strong>Creative romantic</strong><span>1536 dimensions analyzed</span><div><i>Romantic</i><i>Curious</i><i>Warm</i></div></div>
-            <div className="siq-score"><b>78</b><span>SIQ</span><i /></div>
-            <div className="coach-panel"><small>AI coach</small><strong>Start with one curious question.</strong><span>Tone: warm and direct</span><div><b>Listen</b><b>Notice</b><b>Respond</b></div></div>
-            <div className="mission-progress"><span>Today’s mission</span><strong>Start the conversation</strong><i /></div>
+      <div className="project-artwork product-still still-social" aria-hidden="true">
+        <div className="still-frame">
+          <div className="still-meta"><span>Real time coach</span><b>Practice, then reflect</b></div>
+          <div className="coaching-scene">
+            <div className="chat-thread">
+              <small>Conversation practice</small>
+              <p className="chat-them">What have you been excited about lately?</p>
+              <p className="chat-me">I have been building a new side project. It finally works.</p>
+              <p className="chat-them">That sounds fun. What does it do?</p>
+            </div>
+            <div className="coach-note"><small>Coach note</small><strong>Good opening. Ask one follow up before changing the subject.</strong><span>Notice → listen → respond</span></div>
+            <div className="practice-loop"><span>Practice</span><i /><span>Feedback</span><i /><b>Try again</b></div>
           </div>
         </div>
       </div>
@@ -246,26 +269,40 @@ function ProjectArtwork({ type }: { type: string }) {
   }
   if (type === "path") {
     return (
-      <div className="project-artwork product-ui-preview ui-path" aria-hidden="true">
-        <div className="product-ui-window">
-          <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>PathAI / trajectory scan</strong><b>50,247 roles</b></div>
-          <div className="product-ui-body path-workspace">
-            <div className="career-profile"><small>Extracted signals</small><strong>Backend to AI systems</strong><span>7 signals found</span><div><b>Python</b><b>Agents</b><b>Leadership</b><b>System design</b></div></div>
-            <div className="match-list"><small>Selected matches</small><div className="top"><b>98%</b><span><strong>Principal Engineer</strong><em>Stripe · Top pick</em></span></div><div><b>94%</b><span><strong>AI Research Lead</strong><em>OpenAI · Strong fit</em></span></div><div><b>91%</b><span><strong>ML Architect</strong><em>Anthropic · High match</em></span></div></div>
-            <div className="path-status"><span>Profile verified</span><i /><span>Match ranked</span><i /><b>Fast track ready</b></div>
+      <div className="project-artwork product-still still-path" aria-hidden="true">
+        <div className="still-frame">
+          <div className="still-meta"><span>Resume to direction</span><b>Trajectory over keywords</b></div>
+          <div className="career-map-scene">
+            <div className="path-profile-card">
+              <small>Resume signal</small>
+              <strong>Builder profile</strong>
+              <div><span>APIs</span><span>Agents</span><span>Product</span></div>
+            </div>
+            <div className="career-map">
+              <span className="map-axis axis-depth">Systems depth</span>
+              <span className="map-axis axis-ownership">Product ownership</span>
+              <i className="career-route route-one" />
+              <i className="career-route route-two" />
+              <i className="career-route route-three" />
+              <div className="career-point point-origin"><small>Starting signal</small><strong>Backend systems</strong></div>
+              <div className="career-point point-platform"><small>Adjacent route</small><strong>Platform engineering</strong></div>
+              <div className="career-point point-target"><small>Strongest direction</small><strong>AI product engineer</strong></div>
+              <div className="career-point point-tools"><small>Explore next</small><strong>Developer tools</strong></div>
+            </div>
+            <div className="career-map-note"><span>Skills</span><span>Context</span><b>Long term fit</b></div>
           </div>
         </div>
       </div>
     );
   }
   return (
-    <div className="project-artwork product-ui-preview ui-research" aria-hidden="true">
-      <div className="product-ui-window">
-        <div className="product-ui-header"><span className="window-dots"><i /><i /><i /></span><strong>FusionAI / research 031</strong><b>Sourced</b></div>
-        <div className="product-ui-body research-workspace">
-          <div className="research-query"><span>How do agent systems coordinate work?</span><b>Search ↗</b></div>
-          <div className="research-sources"><small>Searching in parallel</small><div><i />Wikipedia <b>ready</b></div><div><i />Open web <b>ready</b></div><div><i />GPT 4o mini <b>ready</b></div></div>
-          <div className="research-answer"><small>Synthesized answer</small><strong>Coordination needs shared state, clear ownership, and ordered handoffs.</strong><p>FusionAI combines three research paths into one explanation while keeping every supporting source visible.</p><div><span>[1]</span><span>[2]</span><span>[3]</span></div></div>
+    <div className="project-artwork product-still still-research" aria-hidden="true">
+      <div className="still-frame">
+        <div className="still-meta"><span>Multi source research</span><b>Citations stay visible</b></div>
+        <div className="synthesis-scene">
+          <div className="source-stack"><div><small>Source 01</small><strong>Wikipedia</strong></div><div><small>Source 02</small><strong>Open web</strong></div><div><small>Source 03</small><strong>GPT 4o mini</strong></div></div>
+          <div className="synthesis-lines"><i /><i /><i /></div>
+          <div className="synthesis-answer"><small>Synthesized answer</small><strong>Agent systems coordinate through shared state, clear ownership, and ordered handoffs.</strong><p>Each claim keeps a visible path back to its source.</p><div><span>[1]</span><span>[2]</span><span>[3]</span></div></div>
         </div>
       </div>
     </div>
@@ -277,57 +314,199 @@ export default function Home() {
   const [activeChapter, setActiveChapter] = useState("Introduction");
   const [copied, setCopied] = useState(false);
   const siteRef = useRef<HTMLDivElement>(null);
+  const projectWorkbenchRef = useRef<HTMLDivElement>(null);
+  const initialProjectRef = useRef(true);
   const project = projects[activeProject];
 
-  useEffect(() => {
+  useGSAP(() => {
     const media = gsap.matchMedia();
-    const context = gsap.context(() => {
-      media.add("(prefers-reduced-motion: no-preference)", () => {
-        const intro = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.05 });
-        intro
-          .from(".identity-card", { autoAlpha: 0, x: -35, duration: 0.55 })
-          .from(".story-hero .eyebrow", { autoAlpha: 0, y: 10, duration: 0.3 }, "<0.08")
-          .from(".story-hero h1", { autoAlpha: 0, y: 24, duration: 0.55 }, "<0.05")
-          .from(".story-hero .hero-copy, .story-hero .hero-index", { autoAlpha: 0, y: 14, stagger: 0.07, duration: 0.4 }, "-=0.25");
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.05 });
+      intro
+        .from(".identity-card", { autoAlpha: 0, x: -35, duration: 0.55 })
+        .from(".story-hero .eyebrow", { autoAlpha: 0, y: 10, duration: 0.3 }, "<0.08")
+        .from(".story-hero h1", { autoAlpha: 0, y: 24, duration: 0.55 }, "<0.05")
+        .from(".story-hero .hero-copy, .story-hero .hero-index", { autoAlpha: 0, y: 14, stagger: 0.07, duration: 0.4 }, "-=0.25");
 
-        gsap.utils.toArray<HTMLElement>(".story-section").forEach((section) => {
-          const chapter = section.dataset.chapter ?? "Working";
-          ScrollTrigger.create({
-            trigger: section,
-            start: "top center",
-            end: "bottom center",
-            onEnter: () => setActiveChapter(chapter),
-            onEnterBack: () => setActiveChapter(chapter),
-          });
-          gsap.from(section.querySelectorAll(":scope > .chapter-heading, :scope > .chapter-body, :scope > .process-note, :scope > .project-workbench, :scope > .experience-list, :scope > .tool-rack, :scope > .contact-panel, :scope > .site-footer"), {
-            autoAlpha: 0,
-            y: 36,
-            stagger: 0.08,
-            duration: 0.65,
-            ease: "power3.out",
-            scrollTrigger: { trigger: section, start: "top 84%", once: true },
-          });
-        });
-
-        gsap.fromTo(".route-progress", { scaleX: 0 }, {
-          scaleX: 1,
-          ease: "none",
-          scrollTrigger: { trigger: ".story-column", start: "top top", end: "bottom bottom", scrub: 0.45 },
-        });
-        gsap.to(".route-marker", {
-          left: "calc(100% - 24px)",
-          ease: "none",
-          scrollTrigger: { trigger: ".story-column", start: "top top", end: "bottom bottom", scrub: 0.45 },
-        });
-
+      gsap.to(".story-hero h1", {
+        yPercent: -7,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".story-hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.65,
+        },
       });
-    }, siteRef);
 
-    return () => {
-      media.revert();
-      context.revert();
-    };
-  }, []);
+      gsap.to(".story-hero .eyebrow, .story-hero .hero-copy, .story-hero .hero-index", {
+        yPercent: -12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".story-hero",
+          start: "35% top",
+          end: "bottom top",
+          scrub: 0.65,
+        },
+      });
+
+      gsap.utils.toArray<HTMLElement>(".story-section").forEach((section) => {
+        const chapter = section.dataset.chapter ?? "Working";
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => setActiveChapter(chapter),
+          onEnterBack: () => setActiveChapter(chapter),
+        });
+
+        gsap.from(section.querySelectorAll(":scope > .chapter-heading, :scope > .chapter-body, :scope > .project-workbench, :scope > .contact-panel, :scope > .site-footer"), {
+          autoAlpha: 0,
+          y: 36,
+          stagger: 0.08,
+          duration: 0.65,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 84%", once: true },
+        });
+
+        const processNote = section.querySelector<HTMLElement>(":scope > .process-note");
+        if (processNote) {
+          gsap.from(processNote, {
+            autoAlpha: 0,
+            y: 14,
+            duration: 0.3,
+            ease: "power2.out",
+            scrollTrigger: { trigger: processNote, start: "top 92%", once: true },
+          });
+        }
+
+        const headline = section.querySelector<HTMLElement>(".chapter-body h2");
+        if (headline) {
+          gsap.fromTo(headline, { yPercent: 5 }, {
+            yPercent: -3,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "top 24%",
+              scrub: 0.55,
+            },
+          });
+        }
+      });
+
+      gsap.utils.toArray<HTMLElement>(".experience-row").forEach((row) => {
+        gsap.from(row, {
+          autoAlpha: 0,
+          y: 24,
+          duration: 0.52,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: row,
+            start: "top 92%",
+            once: true,
+          },
+        });
+      });
+
+      gsap.utils.toArray<HTMLElement>(".tool-rack article").forEach((row, index) => {
+        gsap.from(row, {
+          autoAlpha: 0,
+          x: index % 2 === 0 ? -22 : 22,
+          duration: 0.56,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: row,
+            start: "top 92%",
+            once: true,
+          },
+        });
+      });
+
+      gsap.from(".project-tabs button", {
+        autoAlpha: 0,
+        x: 14,
+        stagger: 0.045,
+        duration: 0.4,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".project-tabs",
+          start: "top 92%",
+          once: true,
+        },
+      });
+
+      gsap.from(".contact-panel > *", {
+        autoAlpha: 0,
+        y: 18,
+        stagger: 0.07,
+        duration: 0.48,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".contact-panel",
+          start: "top 82%",
+          once: true,
+        },
+      });
+
+      gsap.fromTo(".route-progress", { scaleX: 0 }, {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: { trigger: ".story-column", start: "top top", end: "bottom bottom", scrub: 0.45 },
+      });
+      gsap.to(".route-marker", {
+        x: () => {
+          const route = siteRef.current?.querySelector<HTMLElement>(".identity-route");
+          return Math.max(0, (route?.clientWidth ?? 28) - 28);
+        },
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".story-column",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.45,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    media.add("(min-width: 821px) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.to(".portrait-window img", {
+        yPercent: 3,
+        scale: 1.025,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".story-column",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.1,
+        },
+      });
+    });
+
+    return () => media.revert();
+  }, { scope: siteRef });
+
+  useGSAP(() => {
+    if (initialProjectRef.current) {
+      initialProjectRef.current = false;
+      return;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const stage = projectWorkbenchRef.current?.querySelector<HTMLElement>(".project-stage");
+    if (!stage) return;
+
+    const visual = stage.querySelector(".project-visual");
+    const story = stage.querySelectorAll(".project-story > *");
+    const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    timeline
+      .fromTo(stage, { autoAlpha: 0.72 }, { autoAlpha: 1, duration: 0.22 })
+      .fromTo(visual, { xPercent: -2.5, scale: 0.985 }, { xPercent: 0, scale: 1, duration: 0.48 }, 0)
+      .fromTo(story, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, stagger: 0.035, duration: 0.36 }, 0.08);
+  }, { dependencies: [activeProject], scope: projectWorkbenchRef, revertOnUpdate: true });
 
   useEffect(() => {
     const root = siteRef.current;
@@ -435,6 +614,7 @@ export default function Home() {
                   <span key={step}><b>{step}</b>{index < buildSteps.length - 1 && <i>/</i>}</span>
                 ))}
               </p>
+              <BuildArtifact />
             </div>
           </section>
 
@@ -444,7 +624,7 @@ export default function Home() {
               <h2>I learn faster when the idea has to become <em className="accent-violet">real.</em></h2>
               <p>Choose a question. Each project is the system I built to answer it.</p>
             </div>
-            <div className="project-workbench">
+            <div className="project-workbench" ref={projectWorkbenchRef}>
               <article className={`project-stage project-stage-${project.visual}`} id="project-panel" role="tabpanel" key={project.title}>
                 <div className="project-visual" data-pointer-surface="project"><ProjectArtwork type={project.visual} /></div>
                 <div className="project-story">

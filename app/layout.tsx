@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Figtree, IBM_Plex_Mono } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
+import SmoothScroll from "./SmoothScroll";
 
 const figtree = Figtree({
   weight: "variable",
@@ -45,7 +47,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${figtree.variable} ${ibmPlexMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }
