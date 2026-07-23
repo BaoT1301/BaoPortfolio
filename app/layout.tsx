@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import { Figtree, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+
+const figtree = Figtree({
+  weight: "variable",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-figtree",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-plex-mono",
+});
 
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (productionHost ? `https://${productionHost}` : "http://localhost:3000");
@@ -30,14 +45,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var saved=localStorage.getItem("portfolio-theme");var theme=saved==="light"||saved==="dark"?saved:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme}catch(e){}})();`,
-          }}
-        />
-      </head>
+    <html lang="en" className={`${figtree.variable} ${ibmPlexMono.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,10 +17,10 @@ const projects = [
   {
     number: "01",
     title: "Orchestrator Studio",
-    label: "Multi agent dev tool",
+    label: "Multi agent developer tool",
     question: "Can one developer direct a small team of agents without losing the thread?",
     description: "Describe a feature once, fan it into parallel coding worktrees, and merge working commits back in dependency order.",
-    result: "One brief can become parallel workstreams and return as dependency ordered commits on a shared branch.",
+    result: "One brief becomes parallel workstreams, then returns as ordered commits on a shared branch.",
     tech: ["Gemini", "Git Worktrees", "MongoDB"],
     href: "https://forge-landing-51871.web.app/",
     status: "Waitlist",
@@ -30,8 +31,8 @@ const projects = [
     title: "AI Hire AI",
     label: "Agent experiment",
     question: "What changes when both sides of hiring have an agent?",
-    description: "Dual sided agent workflows that batch applications for candidates and create ATS ready evidence packets for recruiters.",
-    result: "The experiment produced candidate application batches and ATS ready recruiter packets through one connected workflow.",
+    description: "Dual sided agent workflows batch applications for candidates and create ATS ready evidence packets for recruiters.",
+    result: "Candidate application batches and recruiter evidence packets now move through one connected workflow.",
     tech: ["Amazon Nova", "Bedrock", "Agents"],
     href: "https://ai-hire-ai.vercel.app",
     status: "Live",
@@ -43,7 +44,7 @@ const projects = [
     label: "AI moderation system",
     question: "Can moderation move faster without removing human judgment?",
     description: "A human controlled Reddit moderation workspace for shared queues, evidence backed semantic review, voting, and audit trails.",
-    result: "Semantic review, voting, and audit history can support moderators while keeping the final decision human.",
+    result: "Semantic review and audit history support moderators while the final decision stays human.",
     tech: ["TypeScript", "Devvit", "Supabase"],
     href: "https://github.com/Nausmind/reddit-hackathon",
     status: "Playtest",
@@ -55,7 +56,7 @@ const projects = [
     label: "Real time trading",
     question: "How do you make a fast market feel understandable?",
     description: "A cryptocurrency trading platform with live prices, market and limit orders, portfolio tooling, and AI powered support.",
-    result: "Live prices, two order types, portfolio tracking, and AI support now live inside one coherent trading flow.",
+    result: "Live prices, order types, portfolio tracking, and AI support live inside one coherent trading flow.",
     tech: ["WebSockets", "Trading Engine", "AI Assistant"],
     href: "https://pocommunity.com/crypto-pilot/",
     status: "Live",
@@ -79,7 +80,7 @@ const projects = [
     label: "AI job search",
     question: "What if a job search understood direction, not just keywords?",
     description: "An AI career engine that reads a resume as a trajectory, then ranks roles by skills, context, and long term fit.",
-    result: "Opportunities can be ranked by trajectory, skills, and context instead of keyword overlap alone.",
+    result: "Opportunities are ranked by trajectory, skills, and context instead of keyword overlap alone.",
     tech: ["LLMs", "Career Matching", "Resume AI"],
     href: "https://path-ai-xi.vercel.app/",
     status: "Live",
@@ -91,7 +92,7 @@ const projects = [
     label: "Research assistant",
     question: "Can research synthesis stay fast without hiding its sources?",
     description: "A research assistant that searches Wikipedia, the open web, and GPT in parallel before returning one sourced answer.",
-    result: "Three research paths converge into one explanation while keeping the supporting sources visible.",
+    result: "Three research paths converge into one explanation while the supporting sources stay visible.",
     tech: ["FastAPI", "LangChain", "GPT 4o mini"],
     href: "https://www.fusionai.studio",
     status: "Live",
@@ -114,7 +115,7 @@ const experiences = [
     role: "Software Engineer Intern",
     date: "Mar 2026 to now",
     href: "https://www.hemut.com/",
-    description: "Designed more than five agent systems, API integrations, and data enrichment pipelines for a logistics startup. Automating internal work and supporting GTM operations.",
+    description: "Designed more than five agent systems, API integrations, and data enrichment pipelines for a logistics startup.",
   },
   {
     company: "Ellucian",
@@ -122,7 +123,7 @@ const experiences = [
     role: "Software Engineer Intern",
     date: "May 2026 to now",
     href: "https://www.ellucian.com/",
-    description: "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment, with a focus on reliable production engineering.",
+    description: "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment.",
   },
   {
     company: "Todd",
@@ -130,7 +131,7 @@ const experiences = [
     role: "Software Engineer Extern",
     date: "Jun 2026 to now",
     href: "https://toddagriscience.com/en",
-    description: "Building AI powered agtech software across product engineering, farm management workflows, and internal tools using Next.js, TypeScript, Supabase, Drizzle, and PostgreSQL.",
+    description: "Building AI powered agtech software across product engineering, farm management workflows, and internal tools.",
   },
   {
     company: "Deepiri",
@@ -138,7 +139,7 @@ const experiences = [
     role: "Founding Engineer",
     date: "Feb 2026 to now",
     href: "https://deepiri.com",
-    description: "Built AI features, ML pipelines, and RAG systems for a research collective with more than 35 developers. Supporting more than 100 internal users and improving research efficiency by 40 percent.",
+    description: "Built AI features, ML pipelines, and RAG systems for more than 100 internal users in a research collective.",
   },
   {
     company: "Handshake",
@@ -146,7 +147,7 @@ const experiences = [
     role: "Software Engineer Fellow",
     date: "May to Jun 2026",
     href: "https://joinhandshake.com/ai/opportunities",
-    description: "Developed golden solutions and adversarial test cases for difficult software engineering tasks, with reliable judging criteria for benchmarking AI coding systems.",
+    description: "Developed golden solutions and adversarial test cases for benchmarking difficult AI coding tasks.",
   },
 ];
 
@@ -157,180 +158,127 @@ const toolGroups = [
   { name: "AI", tools: ["LLMs", "Agents", "RAG", "Automation", "Evaluation"] },
 ];
 
-const ribbonWords = ["notice", "ask", "sketch", "build", "break", "listen", "rebuild", "ship"];
-
-function ProjectStudy({ type }: { type: string }) {
+function ProjectArtwork({ type }: { type: string }) {
   if (type === "orchestrator") {
     return (
-      <div className="study study-orchestrator" aria-hidden="true">
-        <div className="study-note">one brief</div>
-        <div className="agent-line"><span>plan</span><span>api</span><span>ui</span><span>test</span></div>
-        <div className="merge-line"><i /><i /><i /><i /></div>
-        <div className="study-result">working branch <b>✓</b></div>
+      <div className="project-artwork product-scene scene-orchestrator" aria-hidden="true">
+        <div className="scene-bar"><span>ORCHESTRATOR / RUN 014</span><i>LIVE</i></div>
+        <div className="brief-card"><small>ONE BRIEF</small><strong>Build the onboarding flow</strong><span>4 workstreams created</span></div>
+        <div className="agent-board">
+          {[["01", "PLAN"], ["02", "API"], ["03", "UI"], ["04", "TEST"]].map(([number, label]) => <div key={label}><i>{number}</i><strong>{label}</strong><small>ready</small></div>)}
+        </div>
+        <div className="merge-card"><span>4 branches</span><strong>MERGED TO MAIN ✓</strong></div>
       </div>
     );
   }
   if (type === "hire") {
     return (
-      <div className="study study-hire" aria-hidden="true">
-        <div className="hire-side"><i>candidate</i><b>18 roles</b><span>agent prepared</span></div>
-        <div className="hire-pulse">AI<br />↔</div>
-        <div className="hire-side"><i>recruiter</i><b>6 matches</b><span>evidence ready</span></div>
+      <div className="project-artwork product-scene scene-hire" aria-hidden="true">
+        <div className="scene-bar"><span>AI HIRE AI / MATCH 006</span><i>92%</i></div>
+        <div className="profile-card candidate-card"><small>CANDIDATE AGENT</small><b>BAO T.</b><span>18 roles prepared</span><i>skills verified</i></div>
+        <div className="match-bridge"><span>evidence</span><b>↔</b><span>criteria</span></div>
+        <div className="profile-card recruiter-card"><small>RECRUITER AGENT</small><b>PLATFORM TEAM</b><span>6 strong matches</span><i>packet ready</i></div>
       </div>
     );
   }
   if (type === "guard") {
     return (
-      <div className="study study-guard" aria-hidden="true">
-        <div className="comment-card"><span>r/developers</span><b>“You keep posting this link.”</b></div>
-        <div className="risk-scale"><i /><strong>risk 0.84</strong></div>
-        <div className="human-stamp">human review</div>
+      <div className="project-artwork product-scene scene-guard" aria-hidden="true">
+        <div className="scene-bar"><span>COLLABGUARD / MOD QUEUE</span><i>03 OPEN</i></div>
+        <div className="queue-card"><small>SHARED QUEUE</small><strong>r/developers</strong><span>semantic review</span><b>HIGH</b></div>
+        <div className="case-card"><small>CASE / 06 024</small><strong>“You keep posting this link in every thread.”</strong><div><span>SEMANTIC RISK</span><b>0.84</b></div><i /></div>
+        <div className="decision-card"><span>AI surfaces evidence</span><strong>HUMAN DECIDES</strong></div>
       </div>
     );
   }
   if (type === "market") {
     return (
-      <div className="study study-market" aria-hidden="true">
-        <div className="market-value"><span>BTC / USD</span><b>$ 67,842</b><i>+ 2.8%</i></div>
-        <div className="market-bars">{[3, 6, 4, 8, 5, 9, 7, 11, 8, 13, 12, 15].map((height, index) => <i style={{ height: `${height * 4}px` }} key={index} />)}</div>
-        <div className="market-order">market order sent ↗</div>
+      <div className="project-artwork product-scene scene-market" aria-hidden="true">
+        <div className="scene-bar"><span>CRYPTO PILOT / BTC USD</span><i>LIVE</i></div>
+        <div className="price-card"><small>BITCOIN</small><strong>$67,842</strong><span>+ 2.8% TODAY</span></div>
+        <div className="chart-card"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
+        <div className="order-card"><small>MARKET ORDER</small><strong>0.014 BTC</strong><span>READY TO REVIEW →</span></div>
       </div>
     );
   }
   if (type === "social") {
     return (
-      <div className="study study-social" aria-hidden="true">
-        <div className="vibe-orbit"><span>listen</span><span>notice</span><span>respond</span><b>you</b></div>
-        <div className="mission-slip">mission 04<br /><strong>start the conversation</strong></div>
+      <div className="project-artwork product-scene scene-social" aria-hidden="true">
+        <div className="scene-bar"><span>CRUSHIE / MISSION 04</span><i>LEVEL UP</i></div>
+        <div className="coach-card"><small>AI COACH</small><strong>Start with one curious question.</strong><span>tone: warm · direct</span></div>
+        <div className="score-orbit"><b>78</b><span>confidence</span><i /></div>
+        <div className="mission-panel"><small>TODAY</small><strong>Start the conversation</strong><span>listen → notice → respond</span></div>
       </div>
     );
   }
   if (type === "path") {
     return (
-      <div className="study study-path" aria-hidden="true">
-        <div className="path-start">resume</div><i /><div className="path-step">skills</div><i /><div className="path-step">context</div><i /><div className="path-end">best fit<br /><b>92%</b></div>
+      <div className="project-artwork product-scene scene-path" aria-hidden="true">
+        <div className="scene-bar"><span>PATHAI / ROLE MAP</span><i>28 FOUND</i></div>
+        <div className="resume-card"><small>YOUR TRAJECTORY</small><strong>Backend → AI Systems</strong><span>7 signals extracted</span></div>
+        <div className="path-line"><i /><i /><i /><b>→</b></div>
+        <div className="matches-card"><small>BEST FIT</small><div><b>92%</b><span>AI Platform Engineer</span></div><div><b>88%</b><span>Backend Engineer</span></div><div><b>84%</b><span>Developer Tools</span></div></div>
       </div>
     );
   }
   return (
-    <div className="study study-research" aria-hidden="true">
-      <div className="source-stack"><span>wiki</span><span>web</span><span>gpt</span></div>
-      <div className="source-merge"><i /><i /><i /></div>
-      <div className="answer-page"><small>sourced answer</small><b>One useful explanation.</b><span>[1] [2] [3]</span></div>
+    <div className="project-artwork product-scene scene-research" aria-hidden="true">
+      <div className="scene-bar"><span>FUSIONAI / RESEARCH 031</span><i>SOURCED</i></div>
+      <div className="sources-card"><small>SEARCHING IN PARALLEL</small><span>WIKIPEDIA</span><span>OPEN WEB</span><span>GPT</span></div>
+      <div className="source-connector"><i /><i /><i /></div>
+      <div className="answer-card"><small>SYNTHESIZED ANSWER</small><strong>One useful explanation.</strong><p>Clear synthesis with every supporting source still visible.</p><span>[1] [2] [3]</span></div>
     </div>
   );
 }
 
 export default function Home() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [activeProject, setActiveProject] = useState(0);
-  const [activeExperience, setActiveExperience] = useState(0);
+  const [activeChapter, setActiveChapter] = useState("Introduction");
   const [copied, setCopied] = useState(false);
   const siteRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const initialTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-    const frame = window.requestAnimationFrame(() => setTheme(initialTheme));
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
+  const project = projects[activeProject];
 
   useEffect(() => {
     const media = gsap.matchMedia();
     const context = gsap.context(() => {
       media.add("(prefers-reduced-motion: no-preference)", () => {
-        const intro = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.08 });
+        const intro = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.05 });
         intro
-          .from(".hero-edition", { autoAlpha: 0, scale: 0.72, rotate: -16, duration: 0.7 })
-          .from(".hero-statement .field-kicker", { autoAlpha: 0, y: 18, duration: 0.45 }, "-=0.35")
-          .from(".hero-statement h1", { autoAlpha: 0, y: 70, rotate: 1.5, duration: 0.9 }, "-=0.22")
-          .from(".hero-lede", { autoAlpha: 0, y: 28, duration: 0.58 }, "-=0.48")
-          .from(".hero-actions a", { autoAlpha: 0, y: 18, stagger: 0.08, duration: 0.4 }, "-=0.32")
-          .from(".field-portrait", { autoAlpha: 0, x: 70, rotate: 6, scale: 0.9, duration: 0.92 }, "-=0.92")
-          .from(".thought-ribbon", { autoAlpha: 0, yPercent: 120, rotate: 2, duration: 0.65 }, "-=0.38");
+          .from(".identity-card", { autoAlpha: 0, x: -35, duration: 0.55 })
+          .from(".story-hero .eyebrow", { autoAlpha: 0, y: 10, duration: 0.3 }, "<0.08")
+          .from(".story-hero h1", { autoAlpha: 0, y: 24, duration: 0.55 }, "<0.05")
+          .from(".story-hero .hero-copy, .story-hero .hero-index", { autoAlpha: 0, y: 14, stagger: 0.07, duration: 0.4 }, "-=0.25");
 
-        const revealGroups = [
-          ".field-note > *",
-          ".field-section-head > *",
-          ".specimen-browser",
-          ".logbook",
-          ".personal-field > *",
-          ".next-field > *",
-          ".field-contact > *",
-        ];
-
-        revealGroups.forEach((selector) => {
-          gsap.utils.toArray<HTMLElement>(selector).forEach((element, index) => {
-            gsap.from(element, {
-              autoAlpha: 0,
-              y: 48,
-              rotate: index % 2 ? 0.7 : -0.7,
-              duration: 0.75,
-              delay: Math.min(index * 0.07, 0.22),
-              ease: "power3.out",
-              scrollTrigger: { trigger: element, start: "top 90%", once: true },
-            });
+        gsap.utils.toArray<HTMLElement>(".story-section").forEach((section) => {
+          const chapter = section.dataset.chapter ?? "Working";
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => setActiveChapter(chapter),
+            onEnterBack: () => setActiveChapter(chapter),
+          });
+          gsap.from(section.querySelectorAll(":scope > .chapter-heading, :scope > .chapter-body, :scope > .process-note, :scope > .project-workbench, :scope > .experience-list, :scope > .tool-rack, :scope > .contact-panel, :scope > .site-footer"), {
+            autoAlpha: 0,
+            y: 36,
+            stagger: 0.08,
+            duration: 0.65,
+            ease: "power3.out",
+            scrollTrigger: { trigger: section, start: "top 84%", once: true },
           });
         });
 
-        gsap.from(".tool-notes article", {
-          autoAlpha: 0,
-          y: 80,
-          rotate: 5,
-          stagger: 0.12,
-          duration: 0.78,
-          ease: "back.out(1.15)",
-          scrollTrigger: { trigger: ".tool-notes", start: "top 86%", once: true },
-        });
-
-        gsap.to(".field-portrait", {
-          y: -55,
-          rotate: -1.25,
+        gsap.fromTo(".route-progress", { scaleX: 0 }, {
+          scaleX: 1,
           ease: "none",
-          scrollTrigger: { trigger: ".field-hero", start: "top top", end: "bottom top", scrub: 0.8 },
+          scrollTrigger: { trigger: ".story-column", start: "top top", end: "bottom bottom", scrub: 0.45 },
         });
-
-        gsap.to(".hero-edition", {
-          y: 38,
-          rotate: 4,
+        gsap.to(".route-marker", {
+          left: "calc(100% - 24px)",
           ease: "none",
-          scrollTrigger: { trigger: ".field-hero", start: "top top", end: "bottom top", scrub: 1 },
+          scrollTrigger: { trigger: ".story-column", start: "top top", end: "bottom bottom", scrub: 0.45 },
         });
 
-        gsap.utils.toArray<HTMLElement>(".note-stamp, .personal-index, .next-marker").forEach((stamp) => {
-          gsap.to(stamp, {
-            rotate: "+=22",
-            ease: "none",
-            scrollTrigger: { trigger: stamp, start: "top bottom", end: "bottom top", scrub: 1.2 },
-          });
-        });
-      });
-
-      media.add("(min-width: 761px) and (hover: hover) and (prefers-reduced-motion: no-preference)", () => {
-        const hero = siteRef.current?.querySelector<HTMLElement>(".field-hero");
-        const photo = siteRef.current?.querySelector<HTMLElement>(".field-photo");
-        if (!hero || !photo) return;
-
-        const moveX = gsap.quickTo(photo, "rotationY", { duration: 0.55, ease: "power3.out" });
-        const moveY = gsap.quickTo(photo, "rotationX", { duration: 0.55, ease: "power3.out" });
-
-        const onPointerMove = (event: PointerEvent) => {
-          const bounds = hero.getBoundingClientRect();
-          const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-          const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-          moveX(x * 7);
-          moveY(y * -6);
-        };
-        const resetPortrait = () => {
-          moveX(0);
-          moveY(0);
-        };
-
-        hero.addEventListener("pointermove", onPointerMove);
-        hero.addEventListener("pointerleave", resetPortrait);
-        return () => {
-          hero.removeEventListener("pointermove", onPointerMove);
-          hero.removeEventListener("pointerleave", resetPortrait);
-        };
       });
     }, siteRef);
 
@@ -340,223 +288,191 @@ export default function Home() {
     };
   }, []);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "light" ? "dark" : "light";
-    document.documentElement.dataset.theme = nextTheme;
-    document.documentElement.style.colorScheme = nextTheme;
-    window.localStorage.setItem("portfolio-theme", nextTheme);
-    setTheme(nextTheme);
-  };
-
   const copyEmail = async () => {
     await navigator.clipboard.writeText("baotran.swe@gmail.com");
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1600);
   };
 
-  const project = projects[activeProject];
-  const experience = experiences[activeExperience];
+  const moveMotionField = (event: ReactPointerEvent<HTMLElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const field = event.currentTarget;
+    const bounds = field.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    field.querySelectorAll<HTMLElement>(".motion-piece").forEach((piece, index) => {
+      const depth = 3 + (index % 3) * 2;
+      gsap.to(piece, { x: x * depth, y: y * depth, duration: 0.48, ease: "power3.out", overwrite: "auto" });
+    });
+  };
+
+  const resetMotionField = (event: ReactPointerEvent<HTMLElement>) => {
+    const field = event.currentTarget;
+    gsap.to(field.querySelectorAll<HTMLElement>(".motion-piece"), { x: 0, y: 0, duration: 0.65, ease: "power3.out", overwrite: "auto" });
+  };
 
   return (
-    <div className="field-site" ref={siteRef}>
-      <header className="field-header">
-        <a className="field-brand" href="#top" aria-label="Bao Tran, back to top">
-          <strong>Bao Tran</strong>
-          <span>field guide / edition 2026</span>
-        </a>
+    <div className="portfolio-site" ref={siteRef}>
+      <header className="site-topbar">
+        <a className="wordmark" href="#top"><i className="brand-signal" aria-hidden="true" /><span>Bao Tran</span><small>Software engineer</small></a>
         <nav aria-label="Primary navigation">
-          <a href="#work">projects</a>
-          <a href="#experience">experience</a>
-          <a href="#toolkit">toolkit</a>
+          <a href="#work"><span>01</span>Work</a>
+          <a href="#story"><span>02</span>Story</a>
+          <a href="#experience"><span>03</span>Experience</a>
+          <a href="#contact"><span>04</span>Contact</a>
         </nav>
-        <div className="header-actions">
-          <button type="button" onClick={toggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
-            {theme === "dark" ? "day" : "night"}<i aria-hidden="true" />
-          </button>
-          <a href={resumeUrl} target="_blank" rel="noreferrer">résumé ↗</a>
-        </div>
+        <a className="header-resume" href={resumeUrl} target="_blank" rel="noreferrer"><span>05</span>Résumé ↗</a>
       </header>
 
-      <main>
-        <section className="field-hero" id="top">
-          <div className="hero-edition">
-            <span>FG 001</span>
-            <p>software engineer<br />AI builder<br />CS at GMU</p>
-          </div>
-          <div className="hero-statement">
-            <p className="field-kicker">Working notes from Washington DC</p>
-            <h1>Things I build because I need to know if they can <span>work.</span></h1>
-            <p className="hero-lede">I am Bao. I follow the annoying little problems that other people learn to live with, then turn them into systems someone can actually use.</p>
-            <div className="hero-actions">
-              <a href="#work">open the field guide ↓</a>
+      <div className="portfolio-grid">
+        <aside className="identity-column" aria-label="About Bao Tran">
+          <div className="identity-card">
+            <div className="card-meta"><span>PROFILE / BT 01</span><span>WASHINGTON DC</span></div>
+            <div className="portrait-window motion-field" onPointerMove={moveMotionField} onPointerLeave={resetMotionField}>
+              <Image src="/bao-tran-photo-original.png" alt="Portrait of Bao Tran" fill sizes="(max-width: 820px) 88vw, 31vw" priority unoptimized />
+              <div className="identity-art" aria-hidden="true"><i className="motion-piece" /><i className="motion-piece" /><i className="motion-piece" /><i className="motion-piece" /></div>
+            </div>
+            <div className="identity-title"><h2>Bao Tran</h2><span>Software Engineer<br />AI Builder</span></div>
+            <div className="identity-route" aria-hidden="true"><i /><em className="route-progress" /><b className="route-marker">→</b></div>
+            <p className="identity-bio">A CS student at George Mason University building production APIs, AI systems, and full stack products.</p>
+            <div className="chapter-status"><span>Current chapter</span><strong>{activeChapter}</strong></div>
+            <div className="identity-links">
               <a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>
               <a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a href={emailUrl}>Email ↗</a>
             </div>
           </div>
-          <figure className="field-portrait">
-            <div className="photo-corner corner-one" /><div className="photo-corner corner-two" />
-            <div className="field-photo">
-              <Image src="/bao-tran-photo-original.png" alt="Portrait of Bao Tran" fill sizes="(max-width: 760px) 82vw, 32vw" priority unoptimized />
+        </aside>
+
+        <main className="story-column">
+          <section className="story-hero" id="top" data-chapter="Introduction">
+            <p className="eyebrow"><span>●</span> Available for Fall 2026 and Summer 2027</p>
+            <h1><span>I build the thing.</span><span>Then I make it <em className="accent-green">worth using.</em></span></h1>
+            <div className="hero-copy">
+              <p>Software engineer building production APIs, agent workflows, and full stack products with a careful eye for how they feel.</p>
+              <a href="#story">follow the story ↓</a>
             </div>
-            <figcaption><b>researcher 001</b><span>Bao Tran</span><small>available Fall 2026</small></figcaption>
-          </figure>
-          <div className="thought-ribbon" aria-label="Bao's build process">
-            <div className="ribbon-track">
-              {[0, 1].map((copy) => (
-                <div className="ribbon-group" aria-hidden={copy === 1} key={copy}>
-                  {ribbonWords.map((word, index) => <span key={word}>{word}<i>{index % 2 ? "↗" : "●"}</i></span>)}
+            <div className="hero-index" aria-label="Portfolio summary">
+              <span>6 roles</span><i />
+              <span>7 projects</span><i />
+              <span>Production APIs</span><i />
+              <span>AI systems</span>
+            </div>
+          </section>
+
+          <section className="story-section notice-section" id="story" data-chapter="Notice the friction">
+            <div className="chapter-heading"><span>01 / NOTICE</span><p>Where every project starts</p></div>
+            <div className="chapter-body">
+              <h2>Most of my projects begin with something I cannot stop <em className="accent-orange">noticing.</em></h2>
+              <p>A workflow that wastes time. A decision with missing context. A useful idea trapped behind a bad interface. Curiosity gets me started, but usefulness decides what survives.</p>
+            </div>
+            <div className="process-note" aria-label="Bao's build process">
+              <span>HOW I WORK</span>
+              <p>notice / ask / sketch / build / break / listen / rebuild / ship</p>
+            </div>
+          </section>
+
+          <section className="story-section work-section" id="work" data-chapter="Build an answer">
+            <div className="chapter-heading"><span>02 / BUILD</span><p>Seven questions, seven working answers</p></div>
+            <div className="chapter-body">
+              <h2>I learn faster when the idea has to become <em className="accent-violet">real.</em></h2>
+              <p>Choose a question. Each project is the system I built to answer it.</p>
+            </div>
+            <div className="project-workbench">
+              <article className={`project-stage project-stage-${project.visual}`} id="project-panel" role="tabpanel" key={project.title}>
+                <div className="project-visual"><ProjectArtwork type={project.visual} /></div>
+                <div className="project-story">
+                  <div className="panel-meta"><span>{project.label}</span><b>{project.status}</b></div>
+                  <p className="project-number">PROJECT {project.number}</p>
+                  <h3>{project.title}</h3>
+                  <strong>{project.question}</strong>
+                  <p>{project.description}</p>
+                  <div className="project-proof"><span>What it proved</span><p>{project.result}</p></div>
+                  <footer><span>{project.tech.join(" / ")}</span><a href={project.href} target="_blank" rel="noreferrer">open project ↗</a></footer>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="field-note" aria-labelledby="note-title">
-          <div className="note-stamp">NOTE<br />00</div>
-          <div>
-            <p className="field-kicker">A note before the projects</p>
-            <h2 id="note-title">I am less interested in making AI look magical than making it <span>dependable.</span></h2>
-          </div>
-          <p>My favorite work sits between a strange idea and a real constraint. That is where prototypes become products, and where I learn the most.</p>
-        </section>
-
-        <section className="project-field" id="work" aria-labelledby="projects-title">
-          <div className="field-section-head">
-            <span className="section-number">01</span>
-            <div><p className="field-kicker">Project specimens</p><h2 id="projects-title">Seven working answers</h2></div>
-            <p>Choose a question from the index. The plate shows what I built to answer it.</p>
-          </div>
-
-          <div className="specimen-browser">
-            <div className="specimen-index" role="tablist" aria-label="Projects">
-              {projects.map((item, index) => (
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={activeProject === index}
-                  aria-controls="project-specimen"
-                  className={activeProject === index ? "active" : ""}
-                  onClick={() => setActiveProject(index)}
-                  key={item.title}
-                >
-                  <span>{item.number}</span><strong>{item.title}</strong><i>{activeProject === index ? "viewing" : "+"}</i>
-                </button>
-              ))}
-            </div>
-
-            <article className={`specimen-sheet specimen-${project.visual}`} id="project-specimen" role="tabpanel" key={project.title}>
-              <div className="specimen-topline"><span>SPECIMEN {project.number}</span><span>{project.status}</span></div>
-              <div className="study-frame">
-                <span className="study-code">BT / {project.number} / 26</span>
-                <ProjectStudy type={project.visual} key={project.visual} />
-                <span className="scale-mark">not to scale</span>
-              </div>
-              <div className="specimen-copy">
-                <div><p>{project.label}</p><h3>{project.title}</h3></div>
-                <div><strong>{project.question}</strong><p>{project.description}</p></div>
-              </div>
-              <div className="proof-strip">
-                <span>what it proved</span>
-                <p>{project.result}</p>
-              </div>
-              <div className="specimen-footer">
-                <span>{project.tech.join(" / ")}</span>
-                <a href={project.href} target="_blank" rel="noreferrer">open project ↗</a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section className="experience-field" id="experience" aria-labelledby="experience-title">
-          <div className="field-section-head light-head">
-            <span className="section-number">02</span>
-            <div><p className="field-kicker">Practice log</p><h2 id="experience-title">Where the work met reality</h2></div>
-            <p>Teams, users, deadlines, and the useful pressure of production constraints.</p>
-          </div>
-          <div className="logbook-shell">
-            <div className="logbook">
-              <div className="log-tabs" role="tablist" aria-label="Experience">
-                {experiences.map((item, index) => (
+              </article>
+              <div className="project-tabs" role="tablist" aria-label="Projects">
+                {projects.map((item, index) => (
                   <button
                     type="button"
                     role="tab"
-                    aria-selected={activeExperience === index}
-                  aria-controls="experience-entry"
-                  className={activeExperience === index ? "active" : ""}
-                  onClick={() => setActiveExperience(index)}
-                    key={item.company}
+                    aria-selected={activeProject === index}
+                    aria-controls="project-panel"
+                    className={activeProject === index ? "active" : ""}
+                    onClick={() => setActiveProject(index)}
+                    key={item.title}
                   >
-                    <span>0{index + 1}</span><strong>{item.company}</strong><small>{item.role}</small>
+                    <span>{item.number}</span><strong>{item.title}</strong>
                   </button>
                 ))}
               </div>
-              <article className="log-entry" id="experience-entry" role="tabpanel" key={experience.company}>
-                <div className="log-meta"><span>{experience.context}</span><span>{experience.date}</span></div>
-                <p className="log-label">entry 0{activeExperience + 1}</p>
-                <h3>{experience.role}<br />at {experience.company}</h3>
-                <p>{experience.description}</p>
-                <a href={experience.href} target="_blank" rel="noreferrer">visit {experience.company} ↗</a>
-              </article>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="tool-field" id="toolkit" aria-labelledby="toolkit-title">
-          <div className="field-section-head">
-            <span className="section-number">03</span>
-            <div><p className="field-kicker">Contents of the bag</p><h2 id="toolkit-title">The tools I reach for</h2></div>
-            <p>The stack changes. The habit of choosing deliberately does not.</p>
-          </div>
-          <div className="tool-notes">
-            {toolGroups.map((group, index) => (
-              <article key={group.name}>
-                <span>0{index + 1}</span><h3>{group.name}</h3><p>{group.tools.join(" · ")}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+          <section className="story-section experience-section" id="experience" data-chapter="Meet real constraints">
+            <div className="chapter-heading"><span>03 / SHIP</span><p>Where the work met reality</p></div>
+            <div className="chapter-body">
+              <h2>Then the work meets users, deadlines, and <em className="accent-green">production.</em></h2>
+              <p>These are the places that taught me how an idea changes when other people depend on it.</p>
+            </div>
+            <div className="experience-list">
+              {experiences.map((item, index) => (
+                <a className="experience-row" href={item.href} target="_blank" rel="noreferrer" key={item.company}>
+                  <span className="experience-number">0{index + 1}</span>
+                  <div className="experience-company"><small>{item.context}</small><h3>{item.company}</h3></div>
+                  <div className="experience-role"><strong>{item.role}</strong><span>{item.date}</span></div>
+                  <p>{item.description}</p>
+                  <span className="experience-arrow" aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </section>
 
-        <section className="personal-field" aria-labelledby="personal-title">
-          <div className="personal-index">FIELD<br />NOTE<br />04</div>
-          <div className="personal-copy">
-            <p className="field-kicker">Away from the keyboard</p>
-            <h2 id="personal-title">Not every curious thought needs to become a product.</h2>
-            <p>
-              I am still a student, still learning, and still deciding what kind of engineer I want to become. Away from a project, I value thoughtful conversations, unfamiliar perspectives, and curiosity with no deadline attached.
-            </p>
-          </div>
-          <aside>
-            <span>Based in Washington DC</span>
-            <span>Studying CS at George Mason</span>
-            <span>Always asking one more question</span>
-          </aside>
-        </section>
+          <section className="story-section toolkit-section" id="toolkit" data-chapter="Choose the right tool">
+            <div className="chapter-heading"><span>04 / TOOLKIT</span><p>Tools are choices, not identity</p></div>
+            <div className="chapter-body">
+              <h2>The stack changes. The habit of choosing deliberately <em className="accent-yellow">does not.</em></h2>
+              <p className="toolkit-note">I reach for <strong>Python</strong> when the system needs depth, <strong>TypeScript</strong> when people need to touch it, and <strong>infrastructure</strong> when the prototype has to become dependable.</p>
+            </div>
+            <div className="tool-rack">
+              {toolGroups.map((group, index) => (
+                <article key={group.name}>
+                  <span className="tool-index">0{index + 1}</span>
+                  <h3>{group.name}</h3>
+                  <div className="stack-marquee" aria-label={`${group.name}: ${group.tools.join(", ")}`}>
+                    <div className={`stack-track ${index % 2 === 0 ? "moves-left" : "moves-right"}`}>
+                      {[0, 1, 2, 3].map((copy) => (
+                        <div className="stack-segment" aria-hidden={copy > 0} key={copy}>
+                          {group.tools.map((tool) => <span className="tool-name" key={`${copy}-${tool}`}>{tool}</span>)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
 
-        <section className="next-field" aria-labelledby="next-title">
-          <div className="next-marker">NEXT<br />FIELD<br />TRIP</div>
-          <div>
-            <p className="field-kicker">Current question</p>
-            <h2 id="next-title">What should agents do after “hello world”?</h2>
-            <p>I am exploring agent observability, human judgment in automated workflows, developer tools, and AI native interfaces.</p>
-          </div>
-          <aside><i />Looking for Fall 2026 and Summer 2027 software engineering opportunities.</aside>
-        </section>
-
-        <section className="field-contact" id="contact" aria-labelledby="contact-title">
-          <p className="field-kicker">Leave a note in the margin</p>
-          <h2 id="contact-title">Have a hard problem?<br />I want to hear it.</h2>
-          <div>
-            <a href={emailUrl}>baotran.swe@gmail.com ↗</a>
-            <button type="button" onClick={copyEmail} aria-live="polite">{copied ? "email copied" : "copy email"}</button>
-          </div>
-        </section>
-      </main>
-
-      <footer className="field-footer">
-        <div><strong>Bao Tran</strong><span>software engineer / Washington DC</span></div>
-        <p>follow the question until it becomes useful</p>
-        <div><a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
-      </footer>
+          <section className="story-section next-section" id="contact" data-chapter="Ask the next question">
+            <div className="chapter-heading"><span>05 / NEXT</span><p>The story is still being written</p></div>
+            <div className="chapter-body">
+              <h2>What should agents do after <em className="accent-pink">“hello world”?</em></h2>
+              <p>I am exploring agent observability, human judgment in automated workflows, developer tools, and AI native interfaces.</p>
+            </div>
+            <div className="contact-panel">
+              <p>Have a hard problem?</p>
+              <a className="contact-email" href={emailUrl}>baotran.swe<br />@gmail.com</a>
+              <div className="contact-actions"><a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a><button type="button" onClick={copyEmail}>{copied ? "email copied" : "copy email"}</button></div>
+            </div>
+            <footer className="site-footer">
+              <div className="footer-statement"><span>LAST NOTE / 2026</span><strong>Make something useful.</strong></div>
+              <div className="footer-note"><span>Software engineer</span><span>Washington DC</span><span>Available Fall 2026 and Summer 2027</span></div>
+              <nav aria-label="Footer navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#toolkit">Toolkit</a><a href={resumeUrl} target="_blank" rel="noreferrer">Résumé ↗</a></nav>
+              <div className="footer-bottom"><small>© 2026 Bao Tran. Built with curiosity and too many tabs.</small><a href="#top">Back to top ↑</a></div>
+            </footer>
+          </section>
+        </main>
+      </div>
     </div>
   );
 }
