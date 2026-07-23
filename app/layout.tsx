@@ -16,30 +16,29 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
 });
 
-const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (productionHost ? `https://${productionHost}` : "http://localhost:3000");
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://baot1301.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Bao Tran | Software Engineer & AI Builder",
+  title: "Bao Tran | Software Engineer + AI Builder",
   description: "Software engineer building production APIs, agent workflows, and full stack products that actually ship.",
   alternates: { canonical: "/" },
   authors: [{ name: "Bao Tran" }],
   robots: { index: true, follow: true },
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
   openGraph: {
-    title: "Bao Tran | Software Engineer",
-    description: "Building AI systems that actually ship.",
+    title: "Bao Tran | Software Engineer + AI Builder",
+    description: "I build the thing. Then I make it worth using.",
     url: "/",
     siteName: "Bao Tran Portfolio",
-    images: [{ url: "/og.png", width: 1731, height: 909, alt: "Bao Tran | Software Engineer" }],
+    images: [{ url: "/og-2026.png", width: 1731, height: 909, alt: "Bao Tran, Software Engineer and AI Builder" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bao Tran | Software Engineer",
-    description: "Building AI systems that actually ship.",
-    images: ["/og.png"],
+    title: "Bao Tran | Software Engineer + AI Builder",
+    description: "I build the thing. Then I make it worth using.",
+    images: ["/og-2026.png"],
   },
 };
 
