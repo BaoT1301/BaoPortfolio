@@ -147,10 +147,10 @@ const experiences = [
 ];
 
 const toolGroups = [
-  { name: "Languages", tools: ["Python", "Java", "TypeScript", "SQL", "Bash"] },
-  { name: "Product", tools: ["React", "Next.js", "FastAPI", "Node.js", "Tailwind"] },
-  { name: "Systems", tools: ["AWS", "Docker", "PostgreSQL", "Firebase", "Git"] },
-  { name: "AI", tools: ["LLMs", "Agents", "RAG", "Automation", "Evaluation"] },
+  { name: "Languages", tools: ["Python", "Go", "Java", "TypeScript", "SQL"] },
+  { name: "Product", tools: ["React", "Next.js", "FastAPI", "Node.js", "Spring Boot", "LangChain"] },
+  { name: "Systems", tools: ["AWS", "GCP", "Docker", "Kubernetes", "PostgreSQL", "MongoDB", "Redis", "Kafka", "Supabase"] },
+  { name: "AI", tools: ["LLMs", "Agents", "RAG", "Bedrock", "LangGraph", "OpenAI", "PyTorch", "MCP", "pgvector"] },
 ];
 
 const buildSteps = ["notice", "ask", "sketch", "build", "break", "listen", "rebuild", "ship"];
