@@ -95,7 +95,17 @@ const projects = [
   },
 ];
 
-const experiences = [
+type Experience = {
+  company: string;
+  context: string;
+  role: string;
+  date: string;
+  href: string;
+  description: string;
+  collapsed?: boolean;
+};
+
+const experiences: Experience[] = [
   {
     company: "OpenTrade",
     context: "YC S26",
@@ -151,6 +161,7 @@ const experiences = [
     date: "May to Jun 2026",
     href: "https://joinhandshake.com/ai/opportunities",
     description: "Developed golden solutions and adversarial test cases for benchmarking difficult AI coding tasks.",
+    collapsed: true,
   },
 ];
 
@@ -322,6 +333,7 @@ export default function Home() {
   const [activeProject, setActiveProject] = useState(0);
   const [activeChapter, setActiveChapter] = useState("Introduction");
   const [copied, setCopied] = useState(false);
+  const [showAllExperience, setShowAllExperience] = useState(false);
   const siteRef = useRef<HTMLDivElement>(null);
   const projectWorkbenchRef = useRef<HTMLDivElement>(null);
   const initialProjectRef = useRef(true);
@@ -671,7 +683,9 @@ export default function Home() {
               <p>These are the places that taught me how an idea changes when other people depend on it.</p>
             </div>
             <div className="experience-list">
-              {experiences.map((item) => (
+              {experiences
+                .filter((item) => showAllExperience || !item.collapsed)
+                .map((item) => (
                 <a className="experience-row" href={item.href} target="_blank" rel="noreferrer" key={item.company}>
                   <div className="experience-company"><small>{item.context}</small><h3>{item.company}</h3></div>
                   <div className="experience-role"><strong>{item.role}</strong><span>{item.date}</span></div>
@@ -680,6 +694,18 @@ export default function Home() {
                 </a>
               ))}
             </div>
+            {experiences.some((item) => item.collapsed) && (
+              <button
+                type="button"
+                className="experience-toggle"
+                onClick={() => setShowAllExperience((prev) => !prev)}
+                aria-expanded={showAllExperience}
+              >
+                {showAllExperience
+                  ? "Show less"
+                  : `Show ${experiences.filter((item) => item.collapsed).length} more`}
+              </button>
+            )}
           </section>
 
           <section className="story-section toolkit-section" id="toolkit" data-chapter="Choose the right tool">
