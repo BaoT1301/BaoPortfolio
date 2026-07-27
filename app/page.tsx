@@ -101,7 +101,7 @@ const experiences = [
     context: "YC S26",
     role: "Growth Intern",
     date: "Jul 2026 to now",
-    href: "https://www.ycombinator.com/companies/opentrade",
+    href: "https://www.opentrade.live/",
     description: "Built an automated outreach engine that discovers and verifies target communities, drafts personalized messaging, and drove high engagement and weekly active growth for a games first fintech product.",
   },
   {
