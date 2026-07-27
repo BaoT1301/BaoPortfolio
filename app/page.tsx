@@ -97,6 +97,14 @@ const projects = [
 
 const experiences = [
   {
+    company: "OpenTrade",
+    context: "YC S26",
+    role: "Growth Intern",
+    date: "Jul 2026 to now",
+    href: "https://www.ycombinator.com/companies/opentrade",
+    description: "Built an automated outreach engine that discovers and verifies target communities, drafts personalized messaging, and drove high engagement and weekly active growth for a games first fintech product.",
+  },
+  {
     company: "Deep24",
     context: "YC W24",
     role: "Founder Fellow",
