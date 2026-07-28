@@ -1,43 +1,31 @@
+// Regenerate project screenshots in public/shots.
+// Captured at a tablet width (760px) so each site's hero stacks text-first
+// at a comfortable scale — matching how the project stage frames them.
+// Usage: npm i -D playwright && npx playwright install chromium && node scripts/shots.mjs
 import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
-
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const outDir = join(root, "public", "shots");
-mkdirSync(outDir, { recursive: true });
+mkdirSync("public/shots", { recursive: true });
 
 const targets = [
   { slug: "orchestrator", url: "https://forge-landing-51871.web.app/" },
   { slug: "ai-hire", url: "https://ai-hire-ai.vercel.app" },
-  { slug: "collabguard", url: "https://github.com/Nausmind/reddit-hackathon" },
-  { slug: "crypto-pilot", url: "https://pocommunity.com/crypto-pilot/" },
   { slug: "crushie", url: "https://crushie.vercel.app" },
   { slug: "pathai", url: "https://path-ai-xi.vercel.app/" },
   { slug: "fusionai", url: "https://www.fusionai.studio" },
+  { slug: "prism", url: "https://prism-gray-gamma.vercel.app/" },
+  // crypto-pilot is captured manually (site intermittently offline)
 ];
 
-const browser = await chromium.launch();
-const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 2 });
-
+const b = await chromium.launch();
+const ctx = await b.newContext({ viewport: { width: 760, height: 900 }, deviceScaleFactor: 2 });
 for (const t of targets) {
-  const page = await ctx.newPage();
-  try {
-    await page.goto(t.url, { waitUntil: "networkidle", timeout: 45000 });
-  } catch (e) {
-    console.log(`  ${t.slug}: networkidle timed out, using domcontentloaded`);
-    try { await page.goto(t.url, { waitUntil: "domcontentloaded", timeout: 30000 }); } catch {}
-  }
-  await page.waitForTimeout(3500);
-  const out = join(outDir, `${t.slug}.png`);
-  try {
-    await page.screenshot({ path: out });
-    console.log(`  ✔ ${t.slug} -> public/shots/${t.slug}.png`);
-  } catch (e) {
-    console.log(`  �’ ${t.slug} failed: ${e.message}`);
-  }
-  await page.close();
+  const p = await ctx.newPage();
+  try { await p.goto(t.url, { waitUntil: "networkidle", timeout: 45000 }); }
+  catch (e) { console.log(t.slug, "networkidle timed out; retrying"); try { await p.goto(t.url, { waitUntil: "domcontentloaded", timeout: 30000 }); } catch {} }
+  await p.waitForTimeout(4500);
+  await p.screenshot({ path: `public/shots/${t.slug}.jpg`, type: "jpeg", quality: 92 });
+  console.log("saved", t.slug);
+  await p.close();
 }
-
-await browser.close();
+await b.close();
 console.log("done");

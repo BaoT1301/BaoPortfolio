@@ -175,17 +175,21 @@ const toolGroups = [
 const buildSteps = ["notice", "ask", "sketch", "build", "break", "listen", "rebuild", "ship"];
 
 const projectShots: Record<string, string> = {
-  orchestrator: "/shots/orchestrator.png",
-  hire: "/shots/ai-hire.png",
+  orchestrator: "/shots/orchestrator.jpg",
+  hire: "/shots/ai-hire.jpg",
   prism: "/shots/prism.jpg",
   market: "/shots/crypto-pilot.jpg",
-  social: "/shots/crushie.png",
-  path: "/shots/pathai.png",
+  social: "/shots/crushie.jpg",
+  path: "/shots/pathai.jpg",
   research: "/shots/fusionai.jpg",
 };
 
 // Per-project screenshot framing (object-position). Default is top center.
 const shotPosition: Record<string, string> = {
+  orchestrator: "center",
+  hire: "center",
+  social: "center",
+  path: "center",
   research: "28% center",
   prism: "18% center",
 };
