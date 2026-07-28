@@ -470,7 +470,7 @@ export default function Home() {
         <main className="story-column">
           <section className="story-hero" id="top" data-chapter="Introduction">
             <p className="eyebrow"><span>●</span> Available for Fall 2026 and Summer 2027</p>
-            <h1><span>I build the thing.</span><span>Then I make it <em className="accent-green">worth using.</em></span></h1>
+            <h1><span>I build the thing.</span><span>Then I make it <em className="accent-em">worth using.</em></span></h1>
             <div className="hero-copy">
               <p>Software engineer building production APIs, agent workflows, and full stack products with a careful eye for how they feel.</p>
               <a href="#story">follow the story ↓</a>
@@ -486,7 +486,7 @@ export default function Home() {
           <section className="story-section notice-section" id="story" data-chapter="Notice the friction">
             <div className="chapter-heading"><span>NOTICE</span><p>Where every project starts</p></div>
             <div className="chapter-body">
-              <h2>Most of my projects begin with something I cannot stop <em className="accent-orange">noticing.</em></h2>
+              <h2>Most of my projects begin with something I cannot stop <em className="accent-em">noticing.</em></h2>
               <p>A workflow that wastes time. A decision with missing context. A useful idea trapped behind a bad interface. Curiosity gets me started, but usefulness decides what survives.</p>
             </div>
             <div className="process-note" aria-label="Bao's build process">
@@ -503,7 +503,7 @@ export default function Home() {
           <section className="story-section work-section" id="work" data-chapter="Build an answer">
             <div className="chapter-heading"><span>BUILD</span><p>Seven questions, seven working answers</p></div>
             <div className="chapter-body">
-              <h2>I learn faster when the idea has to become <em className="accent-violet">real.</em></h2>
+              <h2>I learn faster when the idea has to become <em className="accent-em">real.</em></h2>
               <p>Choose a question. Each project is the system I built to answer it.</p>
             </div>
             <div className="project-workbench" ref={projectWorkbenchRef}>
@@ -543,7 +543,7 @@ export default function Home() {
           <section className="story-section experience-section" id="experience" data-chapter="Meet real constraints">
             <div className="chapter-heading"><span>SHIP</span><p>Where the work met reality</p></div>
             <div className="chapter-body">
-              <h2>Then the work meets users, deadlines, and <em className="accent-green">production.</em></h2>
+              <h2>Then the work meets users, deadlines, and <em className="accent-em">production.</em></h2>
               <p>These are the places that taught me how an idea changes when other people depend on it.</p>
             </div>
             <div className="experience-list">
@@ -575,7 +575,7 @@ export default function Home() {
           <section className="story-section toolkit-section" id="toolkit" data-chapter="Choose the right tool">
             <div className="chapter-heading"><span>TOOLKIT</span><p>Tools are choices, not identity</p></div>
             <div className="chapter-body">
-              <h2>The stack changes. The habit of choosing deliberately <em className="accent-yellow">does not.</em></h2>
+              <h2>The stack changes. The habit of choosing deliberately <em className="accent-em">does not.</em></h2>
               <p className="toolkit-note">I reach for <strong>Python</strong> when the system needs depth, <strong>TypeScript</strong> when people need to touch it, and <strong>infrastructure</strong> when the prototype has to become dependable.</p>
             </div>
             <div className="tool-rack">
@@ -599,7 +599,7 @@ export default function Home() {
           <section className="story-section next-section" id="contact" data-chapter="Ask the next question">
             <div className="chapter-heading"><span>NEXT</span><p>The story is still being written</p></div>
             <div className="chapter-body">
-              <h2>What should agents do after <em className="accent-pink">“hello world”?</em></h2>
+              <h2>What should agents do after <em className="accent-em">“hello world”?</em></h2>
               <p>I am exploring agent observability, human judgment in automated workflows, developer tools, and AI native interfaces.</p>
             </div>
             <div className="contact-panel">
