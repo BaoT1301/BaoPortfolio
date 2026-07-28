@@ -207,12 +207,16 @@ export default function Home() {
   useGSAP(() => {
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
-      const intro = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.05 });
+      // Entrance choreography: the page assembles, then the headline reveals
+      // line by line from behind a mask. Expo easing, staggered overlaps.
+      const intro = gsap.timeline({ defaults: { ease: "power4.out" }, delay: 0.06 });
       intro
-        .from(".identity-card", { autoAlpha: 0, x: -35, duration: 0.55 })
-        .from(".story-hero .eyebrow", { autoAlpha: 0, y: 10, duration: 0.3 }, "<0.08")
-        .from(".story-hero h1", { autoAlpha: 0, y: 24, duration: 0.55 }, "<0.05")
-        .from(".story-hero .hero-copy, .story-hero .hero-index", { autoAlpha: 0, y: 14, stagger: 0.07, duration: 0.4 }, "-=0.25");
+        .from(".identity-card", { autoAlpha: 0, y: 34, scale: 0.965, transformOrigin: "50% 0%", duration: 0.95 }, 0.05)
+        .from(".portrait-window img", { scale: 1.14, duration: 1.25, ease: "power3.out" }, 0.2)
+        .from(".identity-route", { autoAlpha: 0, scaleX: 0, transformOrigin: "left center", duration: 0.7 }, 0.6)
+        .from(".story-hero .eyebrow", { autoAlpha: 0, y: 16, duration: 0.6 }, 0.42)
+        .from(".story-hero h1 .hl-in", { yPercent: 115, duration: 1.05, stagger: 0.13, ease: "power4.out" }, 0.5)
+        .from(".story-hero .hero-copy > *, .story-hero .hero-index > *", { autoAlpha: 0, y: 18, duration: 0.6, stagger: 0.045 }, 0.98);
 
       gsap.to(".story-hero h1", {
         yPercent: -7,
@@ -432,6 +436,32 @@ export default function Home() {
     return () => cleanups.forEach((cleanup) => cleanup());
   }, [activeProject]);
 
+  // Magnetic Résumé button: eases toward the cursor when it comes near.
+  // Writes transform directly (no React state) so it never re-renders the tree.
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    if (!mq.matches) return;
+    const btn = document.querySelector<HTMLElement>(".header-resume");
+    if (!btn) return;
+    const strength = 0.32;
+    const onMove = (event: PointerEvent) => {
+      const r = btn.getBoundingClientRect();
+      const dx = event.clientX - (r.left + r.width / 2);
+      const dy = event.clientY - (r.top + r.height / 2);
+      const reach = Math.hypot(r.width, r.height) / 2 + 80;
+      if (Math.hypot(dx, dy) < reach) {
+        btn.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+      } else if (btn.style.transform) {
+        btn.style.transform = "";
+      }
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      btn.style.transform = "";
+    };
+  }, []);
+
   const copyEmail = async () => {
     await navigator.clipboard.writeText("baotran.swe@gmail.com");
     setCopied(true);
@@ -474,7 +504,10 @@ export default function Home() {
         <main className="story-column">
           <section className="story-hero" id="top" data-chapter="Introduction">
             <p className="eyebrow"><span>●</span> Available for Fall 2026 and Summer 2027</p>
-            <h1><span>I build the thing.</span><span>Then I make it <em className="accent-em">worth using.</em></span></h1>
+            <h1>
+              <span className="hl"><span className="hl-in">I build the thing.</span></span>
+              <span className="hl"><span className="hl-in">Then I make it <em className="accent-em">worth using.</em></span></span>
+            </h1>
             <div className="hero-copy">
               <p>Software engineer building production APIs, agent workflows, and full stack products with a careful eye for how they feel.</p>
               <a href="#story">follow the story ↓</a>
