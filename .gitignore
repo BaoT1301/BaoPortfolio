@@ -42,3 +42,9 @@ next-env.d.ts
 /outputs/
 /work/
 /tmp/
+
+# typescript build cache
+*.tsbuildinfo
+
+# stale astro cache
+.astro/

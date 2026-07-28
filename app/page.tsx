@@ -39,15 +39,15 @@ const projects = [
     visual: "hire",
   },
   {
-    title: "CollabGuard",
-    label: "AI moderation system",
-    question: "Can moderation move faster without removing human judgment?",
-    description: "A human controlled Reddit moderation workspace for shared queues, evidence backed semantic review, voting, and audit trails.",
-    result: "Semantic review and audit history support moderators while the final decision stays human.",
-    tech: ["TypeScript", "Devvit", "Supabase"],
-    href: "https://github.com/Nausmind/reddit-hackathon",
-    status: "Playtest",
-    visual: "guard",
+    title: "Prism",
+    label: "Personalized learning",
+    question: "Can one lesson meet every student where they already are?",
+    description: "Turns one teacher set objective into an interactive lab personalized to each student's interests, holding the same rigor while changing the way in.",
+    result: "One objective becomes three tailored paths, basketball, Formula 1, and space, each preserving the same difficulty.",
+    tech: ["Next.js", "LLMs", "EdTech"],
+    href: "https://prism-gray-gamma.vercel.app/",
+    status: "Live",
+    visual: "prism",
   },
   {
     title: "Crypto Pilot",
@@ -174,160 +174,21 @@ const toolGroups = [
 
 const buildSteps = ["notice", "ask", "sketch", "build", "break", "listen", "rebuild", "ship"];
 
-function ProjectArtwork({ type }: { type: string }) {
-  if (type === "orchestrator") {
-    return (
-      <div className="project-artwork product-still still-orchestrator" aria-hidden="true">
-        <div className="still-frame">
-          <div className="still-meta"><span>One brief</span><b>Merged to main</b></div>
-          <div className="orchestrator-map">
-            <div className="map-card map-brief"><small>Brief</small><strong>Add OAuth login and session refresh</strong></div>
-            <i className="flow-main-fill" />
-            <div className="map-card map-architect">
-              <small>Gemini</small>
-              <strong>Architect</strong>
-              <span className="node-copy">Plans the work</span>
-              <span className="node-state"><b className="state-processing">Planning</b><b className="state-ready">Plan ready</b></span>
-              <span className="node-progress"><i /></span>
-            </div>
-            <div className="map-branches">
-              <i className="branch-trunk branch-trunk-in"><b /></i>
-              <i className="branch-trunk branch-trunk-out"><b /></i>
-              <div className="map-track map-track-a">
-                <small>Track A</small><strong>Frontend</strong>
-                <span className="node-state"><b className="state-processing">Processing</b><b className="state-ready">Ready</b></span>
-                <span className="node-progress"><i /></span>
-              </div>
-              <div className="map-track map-track-b">
-                <small>Track B</small><strong>Backend</strong>
-                <span className="node-state"><b className="state-processing">Processing</b><b className="state-ready">Ready</b></span>
-                <span className="node-progress"><i /></span>
-              </div>
-              <div className="map-track map-track-c">
-                <small>Track C</small><strong>Tests</strong>
-                <span className="node-state"><b className="state-processing">Processing</b><b className="state-ready">Ready</b></span>
-                <span className="node-progress"><i /></span>
-              </div>
-            </div>
-            <div className="map-card map-merge"><small>Shared branch</small><strong>Ordered merge</strong><span>Working commits</span></div>
-            <div className="merge-confirmation"><span>Main</span><strong>Merged</strong><small>Frontend + backend + tests</small></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (type === "hire") {
-    return (
-      <div className="project-artwork product-still still-hire" aria-hidden="true">
-        <div className="still-frame">
-          <div className="still-meta"><span>Two sided agents</span><b>Human review gate</b></div>
-          <div className="interview-scene">
-            <i className="interview-signal" />
-            <div className="agent agent-candidate"><small>Candidate agent</small><strong>Tailors the application</strong><span>Resume + role context</span></div>
-            <div className="interview-transcript">
-              <small>Interview exchange</small>
-              <p><b>Recruiter</b> Tell me about a system you shipped.</p>
-              <p><b>Candidate</b> I built an agent workflow that turns one brief into reviewed commits.</p>
-            </div>
-            <div className="agent agent-recruiter"><small>Recruiter agent</small><strong>Builds the evidence packet</strong><span>Links + notes + signals</span></div>
-            <div className="evidence-packet"><span>Application</span><span>Interview</span><span>Public work</span><b>Ready for review</b></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (type === "guard") {
-    return (
-      <div className="project-artwork product-still still-guard" aria-hidden="true">
-        <div className="still-frame">
-          <div className="still-meta"><span>Shared moderation queue</span><b>Human controlled</b></div>
-          <div className="moderation-flow">
-            <i className="moderation-signal" />
-            <div className="case-card"><small>Reported comment</small><strong>“You keep posting this link in every thread.”</strong><span>r/developers</span></div>
-            <div className="evidence-card"><small>Evidence gathered</small><span>Repeated link</span><span>Thread context</span><span>Community reports</span></div>
-            <div className="decision-card"><small>Moderator decides</small><strong>Review the context</strong><div><span>Gentle nudge</span><span>Start vote</span></div><b>Final action stays human</b></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (type === "market") {
-    return (
-      <div className="project-artwork product-still still-market" aria-hidden="true">
-        <div className="still-frame">
-          <div className="still-meta"><span>Live market</span><b>Review before submit</b></div>
-          <div className="trading-scene">
-            <div className="market-title"><small>BTC / USD</small><strong>Price movement, without the noise.</strong><span>Live WebSocket feed</span></div>
-            <div className="market-bars">
-              {[32, 45, 37, 56, 48, 67, 59, 77, 69, 86, 79, 93].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
-              <span className="market-scan" />
-            </div>
-            <div className="trade-ticket"><small>Limit order</small><div><span>Side</span><b>Buy</b></div><div><span>Asset</span><b>Bitcoin</b></div><strong>Review order</strong></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (type === "social") {
-    return (
-      <div className="project-artwork product-still still-social" aria-hidden="true">
-        <div className="still-frame">
-          <div className="still-meta"><span>Real time coach</span><b>Practice, then reflect</b></div>
-          <div className="coaching-scene">
-            <div className="chat-thread">
-              <small>Conversation practice</small>
-              <p className="chat-them">What have you been excited about lately?</p>
-              <p className="chat-me">I have been building a new side project. It finally works.</p>
-              <p className="chat-them">That sounds fun. What does it do?</p>
-            </div>
-            <div className="coach-note"><small>Coach note</small><strong>Good opening. Ask one follow up before changing the subject.</strong><span>Notice → listen → respond</span></div>
-            <div className="practice-loop"><span>Practice</span><i /><span>Feedback</span><i /><b>Try again</b></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (type === "path") {
-    return (
-      <div className="project-artwork product-still still-path" aria-hidden="true">
-        <div className="still-frame">
-          <div className="still-meta"><span>Resume to direction</span><b>Trajectory over keywords</b></div>
-          <div className="career-map-scene">
-            <div className="path-profile-card">
-              <small>Resume signal</small>
-              <strong>Builder profile</strong>
-              <div><span>APIs</span><span>Agents</span><span>Product</span></div>
-            </div>
-            <div className="career-map">
-              <span className="map-axis axis-depth">Systems depth</span>
-              <span className="map-axis axis-ownership">Product ownership</span>
-              <i className="career-route route-one" />
-              <i className="career-route route-two" />
-              <i className="career-route route-three" />
-              <div className="career-point point-origin"><small>Starting signal</small><strong>Backend systems</strong></div>
-              <div className="career-point point-platform"><small>Adjacent route</small><strong>Platform engineering</strong></div>
-              <div className="career-point point-target"><small>Strongest direction</small><strong>AI product engineer</strong></div>
-              <div className="career-point point-tools"><small>Explore next</small><strong>Developer tools</strong></div>
-            </div>
-            <div className="career-map-note"><span>Skills</span><span>Context</span><b>Long term fit</b></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="project-artwork product-still still-research" aria-hidden="true">
-      <div className="still-frame">
-        <div className="still-meta"><span>Multi source research</span><b>Citations stay visible</b></div>
-        <div className="synthesis-scene">
-          <div className="source-stack"><div><small>Source 01</small><strong>Wikipedia</strong></div><div><small>Source 02</small><strong>Open web</strong></div><div><small>Source 03</small><strong>GPT 4o mini</strong></div></div>
-          <div className="synthesis-lines"><i /><i /><i /></div>
-          <div className="synthesis-answer"><small>Synthesized answer</small><strong>Agent systems coordinate through shared state, clear ownership, and ordered handoffs.</strong><p>Each claim keeps a visible path back to its source.</p><div><span>[1]</span><span>[2]</span><span>[3]</span></div></div>
-        </div>
-      </div>
-    </div>
-  );
-}
+const projectShots: Record<string, string> = {
+  orchestrator: "/shots/orchestrator.png",
+  hire: "/shots/ai-hire.png",
+  prism: "/shots/prism.jpg",
+  market: "/shots/crypto-pilot.jpg",
+  social: "/shots/crushie.png",
+  path: "/shots/pathai.png",
+  research: "/shots/fusionai.jpg",
+};
+
+// Per-project screenshot framing (object-position). Default is top center.
+const shotPosition: Record<string, string> = {
+  research: "28% center",
+  prism: "18% center",
+};
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState(0);
@@ -647,7 +508,10 @@ export default function Home() {
             </div>
             <div className="project-workbench" ref={projectWorkbenchRef}>
               <article className={`project-stage project-stage-${project.visual}`} id="project-panel" role="tabpanel" key={project.title}>
-                <div className="project-visual" data-pointer-surface="project"><ProjectArtwork type={project.visual} /></div>
+                <div className="project-visual" data-pointer-surface="project">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="project-shot" style={{ objectPosition: shotPosition[project.visual] ?? "top center" }} src={projectShots[project.visual] ?? "/shots/orchestrator.png"} alt={`${project.title} screenshot`} />
+                </div>
                 <div className="project-story">
                   <div className="panel-meta"><span>{project.label}</span><b>{project.status}</b></div>
                   <p className="project-number">SELECTED PROJECT</p>
