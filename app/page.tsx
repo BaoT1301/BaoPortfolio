@@ -56,7 +56,7 @@ const projects = [
     description: "A cryptocurrency trading platform with live prices, market and limit orders, portfolio tooling, and AI powered support.",
     result: "Live prices, order types, portfolio tracking, and AI support live inside one coherent trading flow.",
     tech: ["WebSockets", "Trading Engine", "AI Assistant"],
-    href: "https://pocommunity.com/crypto-pilot/",
+    href: "https://cryptopilot.up.railway.app/",
     status: "Live",
     visual: "market",
   },
@@ -190,6 +190,7 @@ const shotPosition: Record<string, string> = {
   hire: "center",
   social: "center",
   path: "center",
+  market: "22% center",
   research: "28% center",
   prism: "18% center",
 };

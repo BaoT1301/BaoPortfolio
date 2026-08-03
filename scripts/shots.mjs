@@ -13,7 +13,7 @@ const targets = [
   { slug: "pathai", url: "https://path-ai-xi.vercel.app/" },
   { slug: "fusionai", url: "https://www.fusionai.studio" },
   { slug: "prism", url: "https://prism-gray-gamma.vercel.app/" },
-  // crypto-pilot is captured manually (site intermittently offline)
+  { slug: "crypto-pilot", url: "https://cryptopilot.up.railway.app/" },
 ];
 
 const b = await chromium.launch();
