@@ -10,7 +10,7 @@ const targets = [
   { slug: "orchestrator", url: "https://forge-landing-51871.web.app/" },
   { slug: "ai-hire", url: "https://ai-hire-ai.vercel.app" },
   { slug: "crushie", url: "https://crushie.vercel.app" },
-  { slug: "pathai", url: "https://path-ai-xi.vercel.app/" },
+  { slug: "pathai", url: "https://usepathai.vercel.app/" },
   { slug: "fusionai", url: "https://www.fusionai.studio" },
   { slug: "prism", url: "https://prism-gray-gamma.vercel.app/" },
   { slug: "crypto-pilot", url: "https://cryptopilot.up.railway.app/" },

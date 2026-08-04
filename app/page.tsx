@@ -10,7 +10,7 @@ import BuildArtifact from "./BuildArtifact";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const resumeUrl = "https://drive.google.com/file/d/1PBK70Vilt6ZW9J8aGRqA9h02wR_2zF_T/view?usp=sharing";
+const resumeUrl = "https://drive.google.com/file/d/17pwrc5DSiYTqkT7xk992f-AuPPFvDrjV/view?usp=sharing";
 const emailUrl = "mailto:baotran.swe@gmail.com";
 const githubUrl = "https://github.com/BaoT1301";
 const linkedinUrl = "https://www.linkedin.com/in/baot1301/";
@@ -78,7 +78,7 @@ const projects = [
     description: "An AI career engine that reads a resume as a trajectory, then ranks roles by skills, context, and long term fit.",
     result: "Opportunities are ranked by trajectory, skills, and context instead of keyword overlap alone.",
     tech: ["LLMs", "Career Matching", "Resume AI"],
-    href: "https://path-ai-xi.vercel.app/",
+    href: "https://usepathai.vercel.app/",
     status: "Live",
     visual: "path",
   },
