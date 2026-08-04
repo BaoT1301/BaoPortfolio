@@ -17,13 +17,13 @@ const linkedinUrl = "https://www.linkedin.com/in/baot1301/";
 
 const projects = [
   {
-    title: "Orchestrator Studio",
+    title: "Chuchube Workflow",
     label: "Multi agent developer tool",
     question: "Can one developer direct a small team of agents without losing the thread?",
     description: "Describe a feature once, fan it into parallel coding worktrees, and merge working commits back in dependency order.",
     result: "One brief becomes parallel workstreams, then returns as ordered commits on a shared branch.",
     tech: ["Gemini", "Git Worktrees", "MongoDB"],
-    href: "https://forge-landing-51871.web.app/",
+    href: "https://workflow.chuchube.co/",
     status: "Waitlist",
     visual: "orchestrator",
   },
@@ -186,7 +186,7 @@ const projectShots: Record<string, string> = {
 
 // Per-project screenshot framing (object-position). Default is top center.
 const shotPosition: Record<string, string> = {
-  orchestrator: "center",
+  orchestrator: "22% center",
   hire: "center",
   social: "center",
   path: "center",

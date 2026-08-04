@@ -7,7 +7,7 @@ import { mkdirSync } from "node:fs";
 mkdirSync("public/shots", { recursive: true });
 
 const targets = [
-  { slug: "orchestrator", url: "https://forge-landing-51871.web.app/" },
+  { slug: "orchestrator", url: "https://workflow.chuchube.co/" },
   { slug: "ai-hire", url: "https://ai-hire-ai.vercel.app" },
   { slug: "crushie", url: "https://crushie.vercel.app" },
   { slug: "pathai", url: "https://usepathai.vercel.app/" },
