@@ -9,7 +9,7 @@ mkdirSync("public/shots", { recursive: true });
 const targets = [
   { slug: "orchestrator", url: "https://workflow.chuchube.co/" },
   { slug: "ai-hire", url: "https://ai-hire-ai.vercel.app" },
-  { slug: "crushie", url: "https://crushie.vercel.app" },
+  { slug: "crushie", url: "https://crushie.up.railway.app/" },
   { slug: "pathai", url: "https://usepathai.vercel.app/" },
   { slug: "fusionai", url: "https://www.fusionai.studio" },
   { slug: "prism", url: "https://prism-gray-gamma.vercel.app/" },

@@ -67,7 +67,7 @@ const projects = [
     description: "An AI dating academy with vibe profiles, vision powered coaching, and gamified missions that build social intelligence.",
     result: "Vision coaching became a repeatable practice loop through profiles, feedback, missions, and progression.",
     tech: ["Gemini Vision", "pgvector", "Next.js 16"],
-    href: "https://crushie.vercel.app",
+    href: "https://crushie.up.railway.app/",
     status: "Live",
     visual: "social",
   },
