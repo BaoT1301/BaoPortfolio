@@ -581,7 +581,7 @@ export default function Home() {
                 .filter((item) => showAllExperience || !item.collapsed)
                 .map((item) => (
                 <a className="experience-row" href={item.href} target="_blank" rel="noreferrer" key={item.company}>
-                  <div className="experience-company"><small>{item.context}</small><h3>{item.company}</h3></div>
+                  <div className="experience-company"><small className={item.context.startsWith("YC") ? "ctx-yc" : undefined}>{item.context}</small><h3>{item.company}</h3></div>
                   <div className="experience-role"><strong>{item.role}</strong></div>
                   <p>{item.description}</p>
                   <ArrowUpRight className="experience-arrow external-arrow" weight="regular" aria-hidden="true" />
