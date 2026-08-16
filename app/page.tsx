@@ -113,18 +113,18 @@ const experiences: Experience[] = [
     description: "Built an automated outreach engine that discovers and verifies target communities, drafts personalized messaging, and drove high engagement and weekly active growth for a games first fintech product.",
   },
   {
-    company: "Deep24",
-    context: "YC W24",
-    role: "Founder Fellow",
-    href: "https://deep24.com/",
-    description: "Building an AI startup inside a YC backed founder fellowship. Moving from raw idea to tested product with an AI coach and founder feedback loops.",
-  },
-  {
     company: "Hemut",
     context: "YC X25",
     role: "Software Engineer Intern",
     href: "https://www.hemut.com/",
     description: "Designed more than five agent systems, API integrations, and data enrichment pipelines for a logistics startup.",
+  },
+  {
+    company: "Deep24",
+    context: "YC W24",
+    role: "Founder Fellow",
+    href: "https://deep24.com/",
+    description: "Building an AI startup inside a YC backed founder fellowship. Moving from raw idea to tested product with an AI coach and founder feedback loops.",
   },
   {
     company: "Ellucian",
