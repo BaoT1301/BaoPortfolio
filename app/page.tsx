@@ -10,7 +10,7 @@ import BuildArtifact from "./BuildArtifact";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const resumeUrl = "https://drive.google.com/file/d/17pwrc5DSiYTqkT7xk992f-AuPPFvDrjV/view?usp=sharing";
+const resumeUrl = "https://drive.google.com/file/d/1qGFqSE-PPQgTFeseoSHboO8INOjg2oWn/view?usp=sharing";
 const emailUrl = "mailto:baotran.swe@gmail.com";
 const githubUrl = "https://github.com/BaoT1301";
 const linkedinUrl = "https://www.linkedin.com/in/baot1301/";
