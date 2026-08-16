@@ -120,13 +120,6 @@ const experiences: Experience[] = [
     description: "Building an AI startup inside a YC backed founder fellowship. Moving from raw idea to tested product with an AI coach and founder feedback loops.",
   },
   {
-    company: "Todd",
-    context: "Agtech",
-    role: "Software Engineer Intern",
-    href: "https://toddagriscience.com/en",
-    description: "Building AI powered agtech software across product engineering, farm management workflows, and internal tools.",
-  },
-  {
     company: "Hemut",
     context: "YC X25",
     role: "Software Engineer Intern",
@@ -139,6 +132,13 @@ const experiences: Experience[] = [
     role: "Software Engineer Intern",
     href: "https://www.ellucian.com/",
     description: "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment.",
+  },
+  {
+    company: "Todd",
+    context: "Agtech",
+    role: "Software Engineer Intern",
+    href: "https://toddagriscience.com/en",
+    description: "Building AI powered agtech software across product engineering, farm management workflows, and internal tools.",
   },
   {
     company: "Deepiri",
