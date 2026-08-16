@@ -99,7 +99,6 @@ type Experience = {
   company: string;
   context: string;
   role: string;
-  date: string;
   href: string;
   description: string;
   collapsed?: boolean;
@@ -110,7 +109,6 @@ const experiences: Experience[] = [
     company: "OpenTrade",
     context: "YC S26",
     role: "Growth Intern",
-    date: "Jul 2026 to now",
     href: "https://www.opentrade.live/",
     description: "Built an automated outreach engine that discovers and verifies target communities, drafts personalized messaging, and drove high engagement and weekly active growth for a games first fintech product.",
   },
@@ -118,15 +116,13 @@ const experiences: Experience[] = [
     company: "Deep24",
     context: "YC W24",
     role: "Founder Fellow",
-    date: "Jun 2026 to now",
     href: "https://deep24.com/",
     description: "Building an AI startup inside a YC backed founder fellowship. Moving from raw idea to tested product with an AI coach and founder feedback loops.",
   },
   {
     company: "Todd",
     context: "Agtech",
-    role: "Software Engineer Extern",
-    date: "Jun 2026 to now",
+    role: "Software Engineer Intern",
     href: "https://toddagriscience.com/en",
     description: "Building AI powered agtech software across product engineering, farm management workflows, and internal tools.",
   },
@@ -134,7 +130,6 @@ const experiences: Experience[] = [
     company: "Hemut",
     context: "YC X25",
     role: "Software Engineer Intern",
-    date: "Mar to Jun 2026",
     href: "https://www.hemut.com/",
     description: "Designed more than five agent systems, API integrations, and data enrichment pipelines for a logistics startup.",
   },
@@ -142,7 +137,6 @@ const experiences: Experience[] = [
     company: "Ellucian",
     context: "AI platform",
     role: "Software Engineer Intern",
-    date: "May to Aug 2026",
     href: "https://www.ellucian.com/",
     description: "Contributing to internal AI platform initiatives across token usage, systems architecture, and AWS deployment.",
   },
@@ -150,7 +144,6 @@ const experiences: Experience[] = [
     company: "Deepiri",
     context: "AI research",
     role: "Founding Engineer",
-    date: "Feb to Aug 2026",
     href: "https://deepiri.com",
     description: "Built AI features, ML pipelines, and RAG systems for more than 100 internal users in a research collective.",
   },
@@ -158,7 +151,6 @@ const experiences: Experience[] = [
     company: "Handshake",
     context: "LLM evals",
     role: "Software Engineer Fellow",
-    date: "May to Jun 2026",
     href: "https://joinhandshake.com/ai/opportunities",
     description: "Developed golden solutions and adversarial test cases for benchmarking difficult AI coding tasks.",
     collapsed: true,
@@ -590,7 +582,7 @@ export default function Home() {
                 .map((item) => (
                 <a className="experience-row" href={item.href} target="_blank" rel="noreferrer" key={item.company}>
                   <div className="experience-company"><small>{item.context}</small><h3>{item.company}</h3></div>
-                  <div className="experience-role"><strong>{item.role}</strong><span>{item.date}</span></div>
+                  <div className="experience-role"><strong>{item.role}</strong></div>
                   <p>{item.description}</p>
                   <ArrowUpRight className="experience-arrow external-arrow" weight="regular" aria-hidden="true" />
                 </a>
