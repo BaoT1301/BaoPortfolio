@@ -582,7 +582,7 @@ export default function Home() {
                 .map((item) => (
                 <a className="experience-row" href={item.href} target="_blank" rel="noreferrer" key={item.company}>
                   <div className="experience-company"><small className={item.context.startsWith("YC") ? "ctx-yc" : undefined}>{item.context}</small><h3>{item.company}</h3></div>
-                  <div className="experience-role"><strong>{item.role}</strong></div>
+                  <div className="experience-role"><strong className="role-flip"><span className="role-cur">{item.role}</span><span className="role-alt" aria-hidden="true">{item.role}</span></strong></div>
                   <p>{item.description}</p>
                   <ArrowUpRight className="experience-arrow external-arrow" weight="regular" aria-hidden="true" />
                 </a>
